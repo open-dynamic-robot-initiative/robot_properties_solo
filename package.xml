@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <name>robot_properties_hopper</name>
+  <version>1.0.0</version>
+  <description>robot_properties_hopper</description>
+  <author email="jviereck@tuebingen.mpg.de">Julian Viereck</author>
+  <maintainer email="jviereck@tuebingen.mpg.de">Julian Viereck</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>
