@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package>
-  <name>robot_properties_hopper</name>
+  <name>robot_properties_quadruped</name>
   <version>1.0.0</version>
-  <description>robot_properties_hopper</description>
-  <author email="jviereck@tuebingen.mpg.de">Julian Viereck</author>
-  <maintainer email="jviereck@tuebingen.mpg.de">Julian Viereck</maintainer>
+  <description>robot_properties_quadruped</description>
+  <author email="mnaveau@tuebingen.mpg.de">Maximilien Naveau</author>
+  <maintainer email="mnaveau@tuebingen.mpg.de">Maximilien Naveau</maintainer>
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
