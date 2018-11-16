@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-set(ROBOT hopper)
+set(ROBOT quadruped)
 
 project(robot_properties_${ROBOT})
 
