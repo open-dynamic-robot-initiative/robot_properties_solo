@@ -1,0 +1,51 @@
+is_real_robot: true
+device:
+  name: "test_bench_8_motors"
+  sensors:
+    # motors data
+    motor_positions:
+      size: 8
+    motor_velocities:
+      size: 8
+    motor_currents:
+      size: 8
+    motor_positions:
+      size: 8
+    motor_velocities:
+      size: 8
+    motor_currents:
+      size: 8
+    motor_target_currents:
+      size: 8
+    motor_torques:
+      size: 8
+    motor_target_torques:
+      size: 8
+    motor_encoder_indexes:
+      size: 8
+
+    # joints data
+    joint_positions:
+      size: 8
+    joint_velocities:
+      size: 8
+    joint_torques:
+      size: 8
+    joint_target_torques:
+      size: 8
+
+    # additional data
+    contact_sensors:
+      size: 4
+    slider_positions:
+      size: 4
+  controls:
+    ctrl_joint_torques:
+      size: 8
+hardware_communication:
+  max_missed_control: 10
+  control_period: 1000000 # in nano second this means 1ms <=> 1kz
+  margin_in_control_period: 10000
+
+motor_I: 0.045     # The inertia of a single blmc_motor
+motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
