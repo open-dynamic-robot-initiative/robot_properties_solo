@@ -9,6 +9,10 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <!-- We need the xacro package to build the urdf model -->
+  <build_depend> xacro </build_depend>
+  <run_depend>   xacro </run_depend>
+
   <export>
   </export>
 </package>

@@ -5,7 +5,9 @@ set(ROBOT quadruped)
 project(robot_properties_${ROBOT})
 
 # find dependencies using catkin
-find_package(catkin REQUIRED COMPONENTS xacro)
+find_package(catkin REQUIRED COMPONENTS
+  xacro
+)
 
 # Xacro files of the quadruped
 file(GLOB  xacro_file_names RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/xacro
