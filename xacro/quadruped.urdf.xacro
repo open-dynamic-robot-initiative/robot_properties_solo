@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="quadroped"
+<robot name="quadruped"
   xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
   xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
   xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
@@ -134,13 +134,16 @@
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <mass value="${base_m}"/>
-        <inertia ixx="${1./12. * base_m * (base_h**2 + base_l**2)}" ixy="0" ixz="0" iyy="${1./12. * base_m * (base_h**2 + base_w**2)}" iyz="0" izz="${1./12. * base_m * (base_w**2 + base_l**2)}"/>
+        <inertia ixx="${1./12. * base_m * (base_h*base_h + base_l*base_l)}"
+                 ixy="0" ixz="0" 
+                 iyy="${1./12. * base_m * (base_h*base_h + base_w*base_w)}" 
+                 iyz="0" izz="${1./12. * base_m * (base_w*base_w + base_l*base_l)}"
+        />
     </inertial>
     <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
           <mesh filename="package://quadruped/meshes/cube.obj" scale="${base_w} ${base_l} ${base_h}"/>
-            <!-- <box size="${base_w} ${base_l} ${base_h}"/> -->
         </geometry>
         <material name="white">
             <color rgba="1 1 1 1"/>
@@ -155,9 +158,9 @@
   </link>
 
   <!-- <xacro:leg prefix="FL" rx="${0.}" ry="${0.}"/> -->
-
+<!-- 
   <xacro:leg prefix="FL" rx="${-0.5*base_w}" ry="${0.5*base_l}"/>
   <xacro:leg prefix="FR" rx="${+0.5*base_w}" ry="${0.5*base_l}"/>
   <xacro:leg prefix="HL" rx="${-0.5*base_w}" ry="${-0.5*base_l}"/>
-  <xacro:leg prefix="HR" rx="${+0.5*base_w}" ry="${-0.5*base_l}"/>
+  <xacro:leg prefix="HR" rx="${+0.5*base_w}" ry="${-0.5*base_l}"/> -->
 </robot>
