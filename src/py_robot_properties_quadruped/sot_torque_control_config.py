@@ -7,7 +7,7 @@ import pinocchio as se3
 
 class QuadrupedConfig:
     # name that is used by every other entities. I do not exactly why...
-    robotRef = "quadruped"
+    robot_name = "quadruped"
 
     # PID gains
     kp = 5.0
@@ -15,20 +15,20 @@ class QuadrupedConfig:
     ki = 0.0
 
     # here we use the same urdf as for the quadruped but without the freeflyer
-    testRobotPath = (
+    urdf_path = (
         join(rospkg.RosPack().get_path("robot_properties_quadruped"),
              "urdf",
              "quadruped.urdf")
     )
 
-    testRobotYamlPath = (
+    yaml_path = (
         join(rospkg.RosPack().get_path("robot_properties_quadruped"),
              "config",
              "quadruped.yaml")
     )
 
     # pinocchio model
-    robot_model = se3.buildModelFromUrdf(testRobotPath,
+    robot_model = se3.buildModelFromUrdf(urdf_path,
                                          se3.JointModelFreeFlyer())
 
     # the number of motors, here they are the same as there are only revolute
@@ -36,35 +36,36 @@ class QuadrupedConfig:
     nbJoints = robot_model.nv - 6
 
     # control time period
-    controlDT = 0.001
+    control_period = 0.001
+    dt = control_period
 
     # The inertia of a single blmc_motor
-    motor_I = 0.045
+    motor_inertia = 0.045
 
     # The Kt constant of the motor [Nm/A]: tau = I * Kt
-    motor_KT = 0.025
+    motor_torque_cosntant = 0.025
 
     # maxCurrent = 12 # Ampers
-    maxCurrent = 2
+    max_current = 2
 
     # maximum torques
-    maxTorque = motor_KT * maxCurrent
+    max_torque = motor_torque_cosntant * max_current
 
     # maximum control one can send, here the control is the current.
-    maxControl = maxCurrent
+    max_control = max_current
 
     # mapping between the ctrl vector in the device and the urdf indexes
-    urdftosot = (0,1,2,3,4,5,6,7)
+    urdf_to_dgm = (0,1,2,3,4,5,6,7)
 
-    # ctrlManagerCurrentToControlGain I am not sure what it does so 1.0.
-    ctrlManagerCurrentToControlGain=1.0
+    # ctrl_manager_current_to_control_gain I am not sure what it does so 1.0.
+    ctrl_manager_current_to_control_gain=1.0
 
-    mapJointNameToID = {}
-    mapJointLimits = {}
+    map_joint_name_to_id = {}
+    map_joint_limits = {}
     for i, (name, lb, ub) in enumerate(zip(robot_model.names[1:],
                                        robot_model.lowerPositionLimit,
                                        robot_model.upperPositionLimit)):
-        mapJointNameToID[name] = i
-        mapJointLimits[i] = [float(lb), float(ub)]
+        map_joint_name_to_id[name] = i
+        map_joint_limits[i] = [float(lb), float(ub)]
 
     max_qref = pi
