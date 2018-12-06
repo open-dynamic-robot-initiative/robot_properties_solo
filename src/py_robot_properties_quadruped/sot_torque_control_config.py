@@ -33,7 +33,7 @@ class QuadrupedConfig:
 
     # the number of motors, here they are the same as there are only revolute
     # joints
-    nbJoints = robot_model.nv - 6
+    nb_joints = robot_model.nv - 6
 
     # control time period
     control_period = 0.001
