@@ -158,9 +158,9 @@
   </link>
 
   <!-- <xacro:leg prefix="FL" rx="${0.}" ry="${0.}"/> -->
-<!-- 
+
   <xacro:leg prefix="FL" rx="${-0.5*base_w}" ry="${0.5*base_l}"/>
   <xacro:leg prefix="FR" rx="${+0.5*base_w}" ry="${0.5*base_l}"/>
   <xacro:leg prefix="HL" rx="${-0.5*base_w}" ry="${-0.5*base_l}"/>
-  <xacro:leg prefix="HR" rx="${+0.5*base_w}" ry="${-0.5*base_l}"/> -->
+  <xacro:leg prefix="HR" rx="${+0.5*base_w}" ry="${-0.5*base_l}"/>
 </robot>
