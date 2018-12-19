@@ -11,7 +11,7 @@ class QuadrupedConfig:
 
     # PID gains
     kp = 5.0
-    kd = 1.0
+    kd = 0.1
     ki = 0.0
 
     # here we use the same urdf as for the quadruped but without the freeflyer
