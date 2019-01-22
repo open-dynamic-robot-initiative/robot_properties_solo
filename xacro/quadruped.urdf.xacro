@@ -19,7 +19,7 @@
       <parent link="base_link"/>
       <child link="${prefix}_upperleg"/>
       <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
-      <axis xyz="1 0 0"/>
+      <axis xyz="-1 0 0"/>
       <origin rpy="0 0 0" xyz="${rx} ${ry} 0"/>
       <dynamics damping="0.0" friction="0.0"/>
     </joint>
@@ -56,7 +56,7 @@
       <parent link="${prefix}_upperleg"/>
       <child link="${prefix}_shank"/>
       <limit effort="1000" velocity="10000"/>
-      <axis xyz="1 0 0"/>
+      <axis xyz="-1 0 0"/>
       <origin rpy="0 0 0" xyz="0 0 ${-upper_leg_length}"/>
       <dynamics damping="0.0" friction="0.0"/>
     </joint>
