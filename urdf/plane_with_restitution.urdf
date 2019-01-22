@@ -13,7 +13,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-				<mesh filename="plane.obj" scale="1 1 1"/>
+      <mesh filename="package://quadruped/meshes/plane.obj" scale="1 1 1"/>
       </geometry>
        <material name="white">
         <color rgba="1 1 1 1"/>
@@ -22,7 +22,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 -5"/>
       <geometry>
-	 	     <box size="30 30 10"/>
+      <box size="30 30 10"/>
       </geometry>
     </collision>
   </link>
