@@ -32,7 +32,7 @@ foreach(xacro_file_name ${xacro_file_names})
 endforeach(xacro_file_name)
 
 # add an abstract target to actually trigger the builds
-add_custom_target(urdf_build_files ALL DEPENDS ${urdf_files})
+add_custom_target(${PROJECT_NAME}_urdf_build_files ALL DEPENDS ${urdf_files})
 
 catkin_package()
 catkin_python_setup()
