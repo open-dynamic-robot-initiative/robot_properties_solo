@@ -19,7 +19,7 @@
       <parent link="base_link"/>
       <child link="${prefix}_upperleg"/>
       <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
-      <axis xyz="-1 0 0"/>
+      <axis xyz="0 1 0"/>
       <origin rpy="0 0 0" xyz="${rx} ${ry} 0"/>
       <dynamics damping="0.0" friction="0.0"/>
     </joint>
@@ -49,14 +49,14 @@
           ixx="0.000469609"
           iyy="0.000469609"
           izz="1e-6"/>
-    </inertial>
+      </inertial>
     </link>
 
     <joint name="${prefix}_KFE" type="revolute">
       <parent link="${prefix}_upperleg"/>
       <child link="${prefix}_shank"/>
       <limit effort="1000" velocity="10000"/>
-      <axis xyz="-1 0 0"/>
+      <axis xyz="0 1 0"/>
       <origin rpy="0 0 0" xyz="0 0 ${-upper_leg_length}"/>
       <dynamics damping="0.0" friction="0.0"/>
     </joint>
@@ -134,16 +134,16 @@
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <mass value="${base_m}"/>
-        <inertia ixx="${1./12. * base_m * (base_h*base_h + base_l*base_l)}"
-                 ixy="0" ixz="0" 
-                 iyy="${1./12. * base_m * (base_h*base_h + base_w*base_w)}" 
-                 iyz="0" izz="${1./12. * base_m * (base_w*base_w + base_l*base_l)}"
+        <inertia ixx="${1./12. * base_m * (base_h*base_h + base_w*base_w)}"
+                 iyy="${1./12. * base_m * (base_h*base_h + base_l*base_l)}"
+                 izz="${1./12. * base_m * (base_w*base_w + base_l*base_l)}"
+                 ixy="0" ixz="0" iyz="0"
         />
     </inertial>
     <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://quadruped/meshes/cube.obj" scale="${base_w} ${base_l} ${base_h}"/>
+          <mesh filename="package://quadruped/meshes/cube.obj" scale="${base_l} ${base_w} ${base_h}"/>
         </geometry>
         <material name="white">
             <color rgba="1 1 1 1"/>
@@ -152,15 +152,15 @@
     <collision>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-            <box size="${base_w} ${base_l} ${base_h}"/>
+            <box size="${base_l} ${base_w} ${base_h}"/>
         </geometry>
     </collision>
   </link>
 
   <!-- <xacro:leg prefix="FL" rx="${0.}" ry="${0.}"/> -->
 
-  <xacro:leg prefix="FL" rx="${-0.5*base_w}" ry="${0.5*base_l}"/>
-  <xacro:leg prefix="FR" rx="${+0.5*base_w}" ry="${0.5*base_l}"/>
-  <xacro:leg prefix="HL" rx="${-0.5*base_w}" ry="${-0.5*base_l}"/>
-  <xacro:leg prefix="HR" rx="${+0.5*base_w}" ry="${-0.5*base_l}"/>
+  <xacro:leg prefix="FL" ry="${+0.5*base_w}" rx="${0.5*base_l}"/>
+  <xacro:leg prefix="FR" ry="${-0.5*base_w}" rx="${0.5*base_l}"/>
+  <xacro:leg prefix="HL" ry="${+0.5*base_w}" rx="${-0.5*base_l}"/>
+  <xacro:leg prefix="HR" ry="${-0.5*base_w}" rx="${-0.5*base_l}"/>
 </robot>
