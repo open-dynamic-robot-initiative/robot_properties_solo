@@ -27,9 +27,20 @@ class QuadrupedConfig:
              "quadruped.yaml")
     )
 
+    # The inertia of a single blmc_motor
+    motor_inertia = 0.0000045
+
+    # The motor gear ratio
+    motor_gear_ration = 9.
+
+    # The Kt constant of the motor [Nm/A]: tau = I * Kt
+    motor_torque_cosntant = 0.025
+
     # pinocchio model
     robot_model = se3.buildModelFromUrdf(urdf_path,
                                          se3.JointModelFreeFlyer())
+    robot_model.rotorInertia[6:] = motor_inertia
+    robot_model.rotorGearRatio[6:] = motor_gear_ration
 
     # the number of motors, here they are the same as there are only revolute
     # joints
@@ -39,11 +50,6 @@ class QuadrupedConfig:
     control_period = 0.001
     dt = control_period
 
-    # The inertia of a single blmc_motor
-    motor_inertia = 0.045
-
-    # The Kt constant of the motor [Nm/A]: tau = I * Kt
-    motor_torque_cosntant = 0.025
 
     # maxCurrent = 12 # Ampers
     max_current = 2
@@ -69,3 +75,7 @@ class QuadrupedConfig:
         map_joint_limits[i] = [float(lb), float(ub)]
 
     max_qref = pi
+
+    @staticmethod
+    def buildRobotWrapper():
+        return se3.robot_wrapper.RobotWrapper(QuadrupedConfig.robot_model)
