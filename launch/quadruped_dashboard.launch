@@ -1,0 +1,27 @@
+<launch>
+  <!-- Setup the arguments -->
+  <arg name="robot_model" default="quadruped" doc="name of the urdf file without extension."/>
+
+  <!-- Simple hack to make the robot name in the package name -->
+  <arg name="dollar" value="$" />
+  <arg name="xacro_path" value="(find robot_properties_$(arg robot_model))/xacro/$(arg robot_model).urdf.xacro" />
+  <arg name="rqt_path" value="(find robot_properties_$(arg robot_model))/rqt/$(arg robot_model).perspective" />
+
+  <!-- Setup the urdf model as parameter -->
+  <param name="$(arg robot_model)_robot_description"
+      command="$(find xacro)/xacro '$(arg dollar)$(arg xacro_path)' " />
+
+  <!-- Export the state of the robot from its configuration vector -->
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="$(arg robot_model)_state_publisher" required="true">
+      <remap from="robot_description" to="$(arg robot_model)_robot_description" />
+      <remap from="joint_states" to="$(arg robot_model)_joint_states" />
+      <param name="tf_prefix" value="$(arg robot_model)" />
+  </node>
+
+  <!-- Launch rqt with the preconfigured perspective. One can setup a
+       perspective super easily using the rqt graphical interface and save
+       the configuration somewhere. -->
+  <node pkg="rqt_gui" type="rqt_gui" name="$(arg robot_model)_rqt"
+        args="--perspective-file '$(arg dollar)$(arg rqt_path)'"
+        required="true" />
+</launch>

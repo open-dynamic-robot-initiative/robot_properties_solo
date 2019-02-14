@@ -1,0 +1,25 @@
+<launch>
+  <!-- Setup the arguments -->
+  <arg name="robot_model" default="quadruped" doc="name of the urdf file without extension."/>
+
+  <!-- Simple hack to make the robot name in the package name -->
+  <arg name="dollar" value="$" />
+  <arg name="xacro_path" value="(find robot_properties_$(arg robot_model))/xacro/$(arg robot_model).urdf.xacro" />
+  <arg name="rviz_path" value="(find robot_properties_$(arg robot_model))/rviz/$(arg robot_model).rviz" />
+
+  <!-- Setup the urdf model as parameter -->
+  <param name="$(arg robot_model)_robot_description"
+      command="$(find xacro)/xacro '$(arg dollar)$(arg xacro_path)' " />
+
+  <!-- Export the state of the robot from its configuration vector -->
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="$(arg robot_model)_state_publisher" required="true">
+      <remap from="robot_description" to="$(arg robot_model)_robot_description" />
+      <remap from="joint_states" to="$(arg robot_model)_joint_states" />
+      <param name="tf_prefix" value="$(arg robot_model)" />
+  </node>
+
+  <!-- Launch rviz with the preconfigured environment. One can setup an
+       environment super easily using the rviz graphical interface and save
+       the configuration somewhere. -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg dollar)$(arg rviz_path)" required="true" />
+</launch>
