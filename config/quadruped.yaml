@@ -1,6 +1,6 @@
 is_real_robot: true
 device:
-  name: "test_bench_8_motors"
+  name: "quadruped"
   sensors:
     # motors data
     motor_positions:
