@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<robot name="quadruped"
+  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+
+  <xacro:property name="color_name" value="grey" />
+  <xacro:property name="color" value="0.8 0.8 0.8" />
+  <xacro:property name="opacity" value="1.0" />
+  <xacro:property name="mesh_ext" value="obj" />
+
+  <link name="base_link">
+    <!-- BASE LINK INERTIAL -->
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="2.0"/>
+        <inertia ixx="1.0"
+                 iyy="1.0"
+                 izz="1.0"
+                 ixy="0" ixz="0" iyz="0"
+        />
+    </inertial>
+    <!-- BASE LINK VISUAL -->
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/quadruped_body.${mesh_ext}"/>
+        </geometry>
+        <material name="${color_name}">
+            <color rgba="${color} ${opacity}"/>
+        </material>
+    </visual>
+    <!-- BASE LINK COLLISION -->
+    <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/quadruped_body.${mesh_ext}"/>
+        </geometry>
+        <material name="${color_name}">
+            <color rgba="${color} ${opacity}"/>
+        </material>
+    </collision>
+  </link> <!-- END BASE LINK -->
+
+  <!-- Include the legs -->
+  <xacro:include filename="leg.xacro"/>
+
+  <!-- Include the front left leg -->
+  <xacro:leg 
+      prefix="FL"
+      is_front="true"
+      is_right="false"
+      mesh_ext="${mesh_ext}"
+      color_name="${color_name}"
+      color="${color}"
+      opacity="${opacity}"/>
+
+  <!-- Include the front right leg -->
+  <xacro:leg 
+      prefix="FR"
+      is_front="true"
+      is_right="true"
+      mesh_ext="${mesh_ext}"
+      color_name="${color_name}"
+      color="${color}"
+      opacity="${opacity}"/>
+
+
+  <!-- Include the hind left leg -->
+  <xacro:leg 
+      prefix="HL"
+      is_front="false"
+      is_right="false"
+      mesh_ext="${mesh_ext}"
+      color_name="${color_name}"
+      color="${color}"
+      opacity="${opacity}"/>
+
+
+  <!-- Include the hind right leg -->
+  <xacro:leg 
+      prefix="HR"
+      is_front="false"
+      is_right="true"
+      mesh_ext="${mesh_ext}"
+      color_name="${color_name}"
+      color="${color}"
+      opacity="${opacity}"/>
+
+</robot>
