@@ -30,7 +30,7 @@
     <!-- Joint between the base and the ${prefix} upper leg -->
     <joint name="${prefix}_HFE" type="revolute">
       <parent link="base_link"/>
-      <child link="${prefix}_upper_leg"/>
+      <child link="${prefix}_UPPER_LEG"/>
       <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
       <!-- joints rotates around the y-axis -->
       <axis xyz="0 1 0"/>
@@ -55,7 +55,7 @@
       <dynamics damping="0.0" friction="0.0"/>
     </joint>
 
-    <link name="${prefix}_upper_leg">
+    <link name="${prefix}_UPPER_LEG">
       <!-- UPPER LEG LINK INERTIAL -->
       <inertial>
         <origin rpy="0 0 0" xyz="0 0 -0.0793"/>
@@ -99,11 +99,8 @@
 
     <!-- KFE: Joint between the upper leg and the lower leg -->
     <joint name="${prefix}_KFE" type="revolute">
-      <parent link="${prefix}_upper_leg"/>
-      <child link="${prefix}_lower_leg"/>
-      
-      <parent link="base_link"/>
-      <child link="${prefix}_upper_leg"/>
+      <parent link="${prefix}_UPPER_LEG"/>
+      <child link="${prefix}_LOWER_LEG"/>
       <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
       <!-- joints rotates around the y-axis -->
       <axis xyz="0 1 0"/>
@@ -128,9 +125,9 @@
       <dynamics damping="0.0" friction="0.0"/>
     </joint>
 
-    <link name="${prefix}_lower_leg">
+    <link name="${prefix}_LOWER_LEG">
       <!-- LOWER LEG LINK INERTIAL -->
-       <inertial>
+      <inertial>
         <origin rpy="0 0 0" xyz="0 0 -0.0756"/>
         <mass value="${lower_leg_mass + 0.01}"/>
         <inertia ixy="0.0" ixz="0.0" iyz="0.0"
@@ -169,5 +166,21 @@
         </material>
       </collision>
     </link> <!-- END LOWER LEG LINK -->
+
+    <!-- KFE: Joint between the upper leg and the lower leg -->
+    <joint name="${prefix}_ANKLE" type="fixed">
+      <parent link="${prefix}_LOWER_LEG"/>
+      <child link="${prefix}_FOOT"/>
+      <!-- Joint placement -->
+      <origin xyz="0 0 ${-HFE_2_KFE_z}" rpy="0 0 0" />
+      <!-- Limits (usefull?) -->
+      <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
+      <!-- pybullet simulation parameters -->
+      <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+
+    <link name="${prefix}_FOOT">
+    </link>
+
   </xacro:macro>
 </robot>
