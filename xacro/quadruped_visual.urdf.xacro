@@ -10,14 +10,20 @@
   <xacro:property name="opacity" value="1.0" />
   <xacro:property name="mesh_ext" value="obj" />
 
+  <!-- Inertia computation -->
+  <xacro:property name="base_w" value=".2" />
+  <xacro:property name="base_l" value=".4" />
+  <xacro:property name="base_h" value=".05" />
+  <xacro:property name="base_m" value="2.0" />
+
   <link name="base_link">
     <!-- BASE LINK INERTIAL -->
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
-        <mass value="2.0"/>
-        <inertia ixx="1.0"
-                 iyy="1.0"
-                 izz="1.0"
+        <mass value="${base_m}"/>
+        <inertia ixx="${1./12. * base_m * (base_h*base_h + base_w*base_w)}"
+                 iyy="${1./12. * base_m * (base_h*base_h + base_l*base_l)}"
+                 izz="${1./12. * base_m * (base_w*base_w + base_l*base_l)}"
                  ixy="0" ixz="0" iyz="0"
         />
     </inertial>

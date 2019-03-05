@@ -17,6 +17,12 @@
   <xacro:property name="KFE_2_contact_y" value="${0 * 0.001}" />
   <xacro:property name="KFE_2_contact_z" value="${(160.00 + 0.5*27) * 0.001}" />
 
+  <!-- Inertia computation -->
+  <xacro:property name="upper_leg_length" value="0.16" />
+  <xacro:property name="upper_leg_radius" value="0.025" />
+  <xacro:property name="upper_leg_mass" value="0.162" />
+  <xacro:property name="lower_leg_mass" value="0.021" />
+
   <!-- This macro has for purpose to define a left leg -->
   <xacro:macro name="leg" params="prefix is_front is_right mesh_ext
                                   color_name color opacity">
@@ -53,12 +59,11 @@
       <!-- UPPER LEG LINK INERTIAL -->
       <inertial>
         <origin rpy="0 0 0" xyz="0 0 -0.0793"/>
-        <mass value="1.0"/>
+        <mass value="${upper_leg_mass}"/>
         <inertia ixy="0.0" ixz="0.0" iyz="0.0"
           ixx="0.000469609"
           iyy="0.000469609"
-          izz="1e-6"
-        />
+          izz="1e-6"/>
       </inertial>
       <!-- UPPER LEG LINK VISUAL -->
       <visual>
@@ -125,14 +130,14 @@
 
     <link name="${prefix}_lower_leg">
       <!-- LOWER LEG LINK INERTIAL -->
-      <inertial>
+       <inertial>
         <origin rpy="0 0 0" xyz="0 0 -0.0756"/>
-        <mass value="1.0"/>
+        <mass value="${lower_leg_mass + 0.01}"/>
         <inertia ixy="0.0" ixz="0.0" iyz="0.0"
           ixx="0.000087575"
           iyy="0.000087575"
           izz="1e-6"/>
-      </inertial>
+     </inertial>
       <!-- LOWER LEG LINK VISUAL -->
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
