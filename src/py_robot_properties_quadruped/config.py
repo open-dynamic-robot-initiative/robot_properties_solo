@@ -1,7 +1,8 @@
 import numpy as np
 from math import pi
 import rospkg
-from os.path import join
+from os.path import join, dirname
+from os import environ
 import pinocchio as se3
 
 
@@ -21,6 +22,10 @@ class QuadrupedConfig:
              "quadruped.urdf")
     )
 
+    meshes_path = [
+      dirname(rospkg.RosPack().get_path("robot_properties_quadruped"))
+    ]
+
     yaml_path = (
         join(rospkg.RosPack().get_path("robot_properties_quadruped"),
              "config",
@@ -34,13 +39,15 @@ class QuadrupedConfig:
     motor_gear_ration = 9.
 
     # The Kt constant of the motor [Nm/A]: tau = I * Kt
-    motor_torque_cosntant = 0.025
+    motor_torque_constant = 0.025
 
     # pinocchio model
     robot_model = se3.buildModelFromUrdf(urdf_path,
                                          se3.JointModelFreeFlyer())
     robot_model.rotorInertia[6:] = motor_inertia
     robot_model.rotorGearRatio[6:] = motor_gear_ration
+
+    base_name = robot_model.frames[2].name
 
     # the number of motors, here they are the same as there are only revolute
     # joints
@@ -55,7 +62,7 @@ class QuadrupedConfig:
     max_current = 2
 
     # maximum torques
-    max_torque = motor_torque_cosntant * max_current
+    max_torque = motor_torque_constant * max_current
 
     # maximum control one can send, here the control is the current.
     max_control = max_current
@@ -76,6 +83,17 @@ class QuadrupedConfig:
 
     max_qref = pi
 
+
+# Define the desired position.
+    initial_configuration = [0.2,0,0.4, 0,0,0,1] + 4*[0.8,-1.6]
+    initial_velocity = (8+6)*[0,]
+
     @staticmethod
     def buildRobotWrapper():
         return se3.robot_wrapper.RobotWrapper(QuadrupedConfig.robot_model)
+
+    def joint_name_in_single_string(self):
+        joint_names = ""
+        for name in self.robot_model.names[2:]:
+            joint_names += name + " "
+        return joint_names

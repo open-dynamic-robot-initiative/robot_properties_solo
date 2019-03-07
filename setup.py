@@ -7,5 +7,6 @@ package_info = generate_distutils_setup()
 package_info['packages'] = ['py_robot_properties_quadruped']
 package_info['package_dir'] = {'': 'src'}
 package_info['install_requires'] = []
+package_info['scrips'] = ['nodes']
 
 setup(**package_info)

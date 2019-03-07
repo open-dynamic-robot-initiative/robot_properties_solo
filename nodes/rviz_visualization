@@ -1,0 +1,3 @@
+#! /bin/bash
+
+roslaunch robot_properties_test_meshes rviz.launch 
