@@ -4,6 +4,7 @@ import rospkg
 from os.path import join, dirname
 from os import environ
 import pinocchio as se3
+from pinocchio.utils import zero
 
 
 class QuadrupedConfig:
@@ -84,9 +85,14 @@ class QuadrupedConfig:
     max_qref = pi
 
 
-# Define the desired position.
+    # Define the initial state.
     initial_configuration = [0.2,0,0.4, 0,0,0,1] + 4*[0.8,-1.6]
     initial_velocity = (8+6)*[0,]
+
+    q0 = zero(robot_model.nq)
+    q0[:] = np.asmatrix(initial_configuration).T
+    v0 = zero(robot_model.nv)
+    a0 = zero(robot_model.nv)
 
     @staticmethod
     def buildRobotWrapper():
