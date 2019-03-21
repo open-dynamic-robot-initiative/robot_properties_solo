@@ -31,7 +31,7 @@
     <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/stl_with_foot/quadruped_body.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_body.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -41,12 +41,17 @@
     <collision>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/stl_with_foot/quadruped_body.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_body.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
         </material>
     </collision>
+    <!-- Bullet specific paramters -->
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
   </link> <!-- END BASE LINK -->
 
   <!-- Include the legs -->
