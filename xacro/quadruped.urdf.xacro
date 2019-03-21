@@ -31,7 +31,7 @@
     <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/quadruped_body.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/stl_with_foot/quadruped_body.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -41,7 +41,7 @@
     <collision>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/quadruped_body.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/stl_with_foot/quadruped_body.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>

@@ -1,42 +1,44 @@
+######################
+# set up the project #
+######################
 cmake_minimum_required(VERSION 2.8.3)
 
 set(ROBOT quadruped)
-
 project(robot_properties_${ROBOT})
+
+# required to use std::shared_ptr in code AND to link the DG plugins
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wl,--no-as-needed")
+
+# ensuring path to libraries are set during install
+set(CMAKE_SKIP_BUILD_RPATH  FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
+
+############################
+# Search for dependencies. #
+############################
 
 # find dependencies using catkin
 find_package(catkin REQUIRED COMPONENTS
-  xacro
+    mpi_cmake_modules
 )
 
-# Xacro files of the quadruped
-file(GLOB  xacro_file_names RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/xacro
-     ${CMAKE_CURRENT_SOURCE_DIR}/xacro/*.xacro)
+##########################
+# Build the xacro files. #
+##########################
 
-foreach(xacro_file_name ${xacro_file_names})
-  # remove .xacro extension
-  string(REGEX MATCH "(.*)[.]xacro$" unused ${xacro_file_name})
-  set(urdf_file_name ${CMAKE_MATCH_1})
+build_xacro_files()
 
-  set(xacro_file_full_path ${CMAKE_CURRENT_SOURCE_DIR}/xacro/${xacro_file_name})
-  set(urdf_file_full_path ${CMAKE_CURRENT_SOURCE_DIR}/urdf/${urdf_file_name})
-
-  # create a rule to generate ${output_filename} from {it}
-  xacro_add_xacro_file(
-    ${xacro_file_full_path}
-    ${urdf_file_full_path}
-  )
-
-  list(APPEND urdf_files ${urdf_file_full_path})
-
-endforeach(xacro_file_name)
-
-# add an abstract target to actually trigger the builds
-add_custom_target(${PROJECT_NAME}_urdf_build_files ALL DEPENDS ${urdf_files})
+##############################
+# Define the Catkin Package. #
+##############################
 
 catkin_package()
+
+#####################################
+# Define the Catkin Python Package. #
+#####################################
+
 catkin_python_setup()
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-
 

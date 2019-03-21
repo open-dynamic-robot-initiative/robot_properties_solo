@@ -13,6 +13,10 @@
   <build_depend> xacro </build_depend>
   <run_depend>   xacro </run_depend>
 
+  <!-- This provide cmake macros to help building the project. -->
+  <build_depend> mpi_cmake_modules </build_depend>
+  <run_depend>   mpi_cmake_modules </run_depend>
+
   <export>
   </export>
 </package>
