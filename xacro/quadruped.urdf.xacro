@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="quadruped"
+<robot name="solo"
   xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
   xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
   xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
@@ -10,26 +10,21 @@
   <xacro:property name="opacity" value="1.0" />
   <xacro:property name="mesh_ext" value="obj" />
 
-  <!-- Inertia computation -->
-  <xacro:property name="base_w" value=".2" />
-  <xacro:property name="base_l" value=".4" />
-  <xacro:property name="base_h" value=".05" />
-  <xacro:property name="base_m" value="2.0" />
-
+  <!-- This file is based on: https://atlas.is.localnet/confluence/display/AMDW/Quadruped+URDF+Files -->
   <link name="base_link">
     <!-- BASE LINK INERTIAL -->
     <inertial>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
-        <mass value="${base_m}"/>
-        <inertia ixx="${1./12. * base_m * (base_h*base_h + base_w*base_w)}"
-                 iyy="${1./12. * base_m * (base_h*base_h + base_l*base_l)}"
-                 izz="${1./12. * base_m * (base_w*base_w + base_l*base_l)}"
-                 ixy="0" ixz="0" iyz="0"
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1.43315091"/>
+        <!-- The base is extremely symmetrical. -->
+        <inertia ixx="0.00578574" ixy="0.0" ixz="0.0"
+                                  iyy="0.01938108" iyz="0.0"
+                                                   izz="0.02476124"                   
         />
     </inertial>
     <!-- BASE LINK VISUAL -->
     <visual>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_body.${mesh_ext}"/>
         </geometry>
@@ -39,7 +34,7 @@
     </visual>
     <!-- BASE LINK COLLISION -->
     <collision>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_body.${mesh_ext}"/>
         </geometry>

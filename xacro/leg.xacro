@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" name="athena">
+<robot xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" name="solo">
 
   <!-- See TODO: add the wiki link here -->
   <!-- These are absoulte distance value, the sign are decided below -->
@@ -16,12 +16,6 @@
   
   <xacro:property name="KFE_2_contact_y" value="${0 * 0.001}" />
   <xacro:property name="KFE_2_contact_z" value="${(160.00 + 0.5*27) * 0.001}" />
-
-  <!-- Inertia computation -->
-  <xacro:property name="upper_leg_length" value="0.16" />
-  <xacro:property name="upper_leg_radius" value="0.025" />
-  <xacro:property name="upper_leg_mass" value="0.162" />
-  <xacro:property name="lower_leg_mass" value="0.021" />
 
   <!-- This macro has for purpose to define a left leg -->
   <xacro:macro name="leg" params="prefix is_front is_right mesh_ext
@@ -57,17 +51,29 @@
 
     <link name="${prefix}_UPPER_LEG">
       <!-- UPPER LEG LINK INERTIAL -->
-      <inertial>
-        <origin rpy="0 0 0" xyz="0 0 -0.0793"/>
-        <mass value="${upper_leg_mass}"/>
-        <inertia ixy="0.0" ixz="0.0" iyz="0.0"
-          ixx="0.000469609"
-          iyy="0.000469609"
-          izz="1e-6"/>
-      </inertial>
+      <xacro:unless value="${is_right}">
+        <!-- Left upper leg inertia -->
+        <inertial>
+        <origin xyz="0.00001377 0.01935853 -0.07870700" rpy="0 0 0" />
+        <mass value="0.14853845"/>
+        <inertia ixx="0.00041107" ixy="0.0"         ixz="0.0"
+                                   iyy="0.00041193" iyz="0.00004671"
+                                                    izz="0.00003024"/>
+        </inertial>
+      </xacro:unless>
+      <xacro:if value="${is_right}">
+        <!-- Right upper leg inertia -->
+        <inertial>
+        <origin xyz="-0.00001377 -0.01935853 -0.07870700" rpy="0 0 0" />
+        <mass value="0.14853845"/>
+        <inertia ixx="0.00041107" ixy="0.0"         ixz="0.0"
+                                   iyy="0.00041193" iyz="-0.00004671"
+                                                    izz="0.00003024"/>
+        </inertial>
+      </xacro:if>
       <!-- UPPER LEG LINK VISUAL -->
       <visual>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
             <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_upper_leg_left_side.${mesh_ext}"/>
@@ -82,7 +88,7 @@
       </visual>
       <!-- UPPER LEG LINK COLLISION -->
       <collision>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
             <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_upper_leg_left_side.${mesh_ext}"/>
@@ -132,17 +138,29 @@
 
     <link name="${prefix}_LOWER_LEG">
       <!-- LOWER LEG LINK INERTIAL -->
-      <inertial>
-        <origin rpy="0 0 0" xyz="0 0 -0.0756"/>
-        <mass value="${lower_leg_mass}"/>
-        <inertia ixy="0.0" ixz="0.0" iyz="0.0"
-          ixx="0.000087575"
-          iyy="0.000087575"
-          izz="1e-6"/>
-     </inertial>
+      <xacro:unless value="${is_right}">
+        <!-- Left lower leg inertia -->
+        <inertial>
+        <origin xyz="0.0 0.00787644 -0.08928215" rpy="0 0 0" />
+        <mass value="0.03070001"/>
+        <inertia ixx="0.00012024" ixy="0.0"         ixz="0.0"
+                                   iyy="0.00012029" iyz="0.00000305"
+                                                    izz="0.00000216"/>
+        </inertial>
+      </xacro:unless>
+      <xacro:if value="${is_right}">
+        <!-- Right lower leg inertia -->
+        <inertial>
+        <origin xyz="0.0 0.00787644 -0.08928215" rpy="0 0 0" />
+        <mass value="0.03070001"/>
+        <inertia ixx="0.00012024" ixy="0.0"         ixz="0.0"
+                                   iyy="0.00012029" iyz="-0.00000305"
+                                                    izz="0.00000216"/>
+        </inertial>
+      </xacro:if>
       <!-- LOWER LEG LINK VISUAL -->
       <visual>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
             <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_lower_leg_left_side.${mesh_ext}"/>
@@ -157,7 +175,7 @@
       </visual>
       <!-- LOWER LEG LINK COLLISION -->
       <collision>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
             <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_lower_leg_left_side.${mesh_ext}"/>
@@ -191,17 +209,17 @@
 
     <link name="${prefix}_FOOT">
       <!-- FOOT INERTIAL -->
+      <!-- This link is symmetrical left or right -->
       <inertial>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
-        <mass value="0.01"/>
-        <inertia ixy="0.0" ixz="0.0" iyz="0.0"
-          ixx="0.0"
-          iyy="0.0"
-          izz="0.0"/>
+        <origin xyz="0 0 0.00035767" rpy="0 0 0" />
+        <mass value="0.00693606"/>
+        <inertia ixx="0.00000057" ixy="0.0"         ixz="0.0"
+                                   iyy="0.00000084" iyz="0.0"
+                                                    izz="0.00000053"/>
      </inertial>
       <!-- FOOT VISUAL -->
       <visual>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_foot.${mesh_ext}"/>
         </geometry>
@@ -211,7 +229,7 @@
       </visual>
       <!-- FOOT COLLISION -->
       <collision>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
             <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_foot.${mesh_ext}"/>
         </geometry>
