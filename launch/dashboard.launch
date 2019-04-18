@@ -1,6 +1,6 @@
 <launch>
   <!-- Setup the arguments -->
-  <arg name="robot_model" default="quadruped" doc="name of the urdf file without extension."/>
+  <arg name="robot_model" default="solo" doc="name of the urdf file without extension."/>
 
   <!-- Simple hack to make the robot name in the package name -->
   <arg name="dollar" value="$" />

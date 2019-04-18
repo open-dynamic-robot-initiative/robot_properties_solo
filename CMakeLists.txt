@@ -3,7 +3,7 @@
 ######################
 cmake_minimum_required(VERSION 2.8.3)
 
-set(ROBOT quadruped)
+set(ROBOT solo)
 project(robot_properties_${ROBOT})
 
 # required to use std::shared_ptr in code AND to link the DG plugins

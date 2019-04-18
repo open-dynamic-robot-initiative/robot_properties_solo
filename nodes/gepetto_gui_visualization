@@ -1,35 +1,7 @@
 #!/usr/bin/env python
 
-from os.path import join, dirname
-import rospkg
-
-from py_robot_properties_quadruped.config import QuadrupedConfig
-from py_gepetto_gui_helper.gepetto_gui_scene import GepettoGuiScene
-from py_gepetto_gui_helper.robot_visual import RobotVisual
-from py_gepetto_gui_helper.frame import Frame
+from robot_properties_solo.gepetto_gui_loader import display_solo_in_gepetto_gui
 
 if __name__ == "__main__":
-    gepetto_gui_process = GepettoGuiScene.open_gepetto_gui()
-    
-    gui_scene = GepettoGuiScene("world", "Testing window")
-    gui_scene.hide_floor(refresh=True)
 
-    # urdf_name = "quadruped.urdf"
-    urdf_name = "quadruped_visual.urdf"
-    
-    urdf_path = (
-        join(rospkg.RosPack().get_path("robot_properties_quadruped"),
-             "urdf", urdf_name))
-
-    meshes_path = [
-        dirname(rospkg.RosPack().get_path("robot_properties_quadruped"))
-    ]
-    
-    robot_visual = RobotVisual(gui_scene, "quadruped_body", urdf_path, meshes_path)
-
-    world_frame = Frame(gui_scene)
-
-    robot_visual.display(robot_visual.q0)
-
-    raw_input("press enter to end..")
-    GepettoGuiScene.close_gepetto_gui(gepetto_gui_process)
+    display_solo_in_gepetto_gui()

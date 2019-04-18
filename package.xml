@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>robot_properties_quadruped</name>
+  <name>robot_properties_solo</name>
   <version>1.0.0</version>
-  <description>robot_properties_quadruped</description>
+  <description>robot_properties_solo</description>
   <author email="mnaveau@tuebingen.mpg.de">Maximilien Naveau</author>
   <maintainer email="mnaveau@tuebingen.mpg.de">Maximilien Naveau</maintainer>
   <license>TODO</license>

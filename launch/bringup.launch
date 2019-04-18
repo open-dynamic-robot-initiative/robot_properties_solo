@@ -1,0 +1,10 @@
+<launch>
+    <!--Start the executable manage the dynamic graph and the robot control-->
+    <node pkg="dg_blmc_robots" type="dgm_solo" name="solo_controller" output="screen"/>
+
+    <!-- Launch the oscilloscope -->
+    <node pkg="rqt_plot" type="rqt_plot" name="solo_oscilloscope"/>
+
+    <!-- Launch the rqt plugin to start the DG with one click -->
+    <node pkg="rqt_dynamic_graph" type="rqt_dynamic_graph" name="solo_dynamic_graph_gui"  />
+</launch>

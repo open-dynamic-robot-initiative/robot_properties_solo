@@ -55,7 +55,7 @@
                 }, 
                 "dock_widget_title": {
                   "type": "repr", 
-                  "repr": "u'quadruped.rviz[*] - RViz'"
+                  "repr": "u'solo.rviz[*] - RViz'"
                 }
               }, 
               "groups": {}

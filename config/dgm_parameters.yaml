@@ -1,6 +1,6 @@
 is_real_robot: true
 device:
-  name: "quadruped"
+  name: "solo"
   sensors:
     # motors data
     motor_target_currents:

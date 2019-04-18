@@ -139,8 +139,8 @@ Visualization Manager:
           Show Trail: false
           Value: true
       Name: RobotModel
-      Robot Description: quadruped_robot_description
-      TF Prefix: quadruped
+      Robot Description: solo_robot_description
+      TF Prefix: solo
       Update Interval: 0
       Value: true
       Visual Enabled: true

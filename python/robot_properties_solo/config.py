@@ -7,9 +7,9 @@ import pinocchio as se3
 from pinocchio.utils import zero
 
 
-class QuadrupedConfig:
+class SoloConfig:
     # name that is used by every other entities. I do not exactly why...
-    robot_name = "quadruped"
+    robot_name = "solo"
 
     # PID gains
     kp = 5.0
@@ -18,19 +18,19 @@ class QuadrupedConfig:
 
     # here we use the same urdf as for the quadruped but without the freeflyer
     urdf_path = (
-        join(rospkg.RosPack().get_path("robot_properties_quadruped"),
+        join(rospkg.RosPack().get_path("robot_properties_" + robot_name),
              "urdf",
-             "quadruped.urdf")
+             robot_name + ".urdf")
     )
 
     meshes_path = [
-      dirname(rospkg.RosPack().get_path("robot_properties_quadruped"))
+      dirname(rospkg.RosPack().get_path("robot_properties_" + robot_name))
     ]
 
     yaml_path = (
-        join(rospkg.RosPack().get_path("robot_properties_quadruped"),
+        join(rospkg.RosPack().get_path("robot_properties_" + robot_name),
              "config",
-             "quadruped.yaml")
+             "dgm_parameters.yaml")
     )
 
     # The inertia of a single blmc_motor
@@ -96,7 +96,7 @@ class QuadrupedConfig:
 
     @staticmethod
     def buildRobotWrapper():
-        return se3.robot_wrapper.RobotWrapper(QuadrupedConfig.robot_model)
+        return se3.robot_wrapper.RobotWrapper(SoloConfig.robot_model)
 
     def joint_name_in_single_string(self):
         joint_names = ""

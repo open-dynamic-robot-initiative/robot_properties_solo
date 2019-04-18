@@ -76,10 +76,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_upper_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_upper_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_upper_leg_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -91,10 +91,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_upper_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_upper_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_upper_leg_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -163,10 +163,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_lower_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_lower_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_lower_leg_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -178,10 +178,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_lower_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_lower_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_lower_leg_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -221,7 +221,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_foot.${mesh_ext}"/>
+          <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
@@ -231,7 +231,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-            <mesh filename="package://robot_properties_quadruped/meshes/${mesh_ext}/with_foot/quadruped_foot.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
         </geometry>
         <material name="${color_name}">
             <color rgba="${color} ${opacity}"/>
