@@ -5,6 +5,7 @@ from os.path import join, dirname
 from os import environ
 import pinocchio as se3
 from pinocchio.utils import zero
+from pinocchio.robot_wrapper import RobotWrapper
 
 
 class SoloConfig:
@@ -96,7 +97,12 @@ class SoloConfig:
 
     @staticmethod
     def buildRobotWrapper():
-        return se3.robot_wrapper.RobotWrapper(SoloConfig.robot_model)
+        # Rebuild the robot wrapper instead of using the existing model to
+        # also load the visuals.
+        robot = RobotWrapper.BuildFromURDF(SoloConfig.urdf_path, SoloConfig.meshes_path, se3.JointModelFreeFlyer())
+        robot.model.rotorInertia[6:] = SoloConfig.motor_inertia
+        robot.model.rotorGearRatio[6:] = SoloConfig.motor_gear_ration
+        return robot
 
     def joint_name_in_single_string(self):
         joint_names = ""
