@@ -8,7 +8,7 @@ URDF and ROS integration of the Solo BLMC robot
 
 - Felix Grimmiger
 - Maximilien Naveau
-- Avadesh Mediro
+- Avadesh Meduri
 - Julian Viereck
 
 ## Copyrights
