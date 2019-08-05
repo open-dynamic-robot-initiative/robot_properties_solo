@@ -6,10 +6,10 @@ URDF and ROS integration of the Solo BLMC robot
 
 ## Authors
 
-Felix Grimmiger
-Maximilien Naveau
-Avadesh Mediro
-Julian Viereck
+- Felix Grimmiger
+- Maximilien Naveau
+- Avadesh Mediro
+- Julian Viereck
 
 ## Copyrights
 
