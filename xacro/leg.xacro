@@ -10,44 +10,92 @@
   <xacro:property name="HFE_2_KFE_y" value="${37.45 * 0.001}" />
   <xacro:property name="HFE_2_KFE_z" value="${160.00 * 0.001}" />
 
-  <!-- To check this data to get the center of the foot properly -->
-  <xacro:property name="KFE_2_FOOT_y" value="${0.5 * 27.00 * 0.001}" />
+  <xacro:property name="KFE_2_FOOT_y" value="${8.0 * 0.001}" />
   <xacro:property name="KFE_2_FOOT_z" value="${160.00 * 0.001}" />
-  
-  <xacro:property name="KFE_2_contact_y" value="${0 * 0.001}" />
-  <xacro:property name="KFE_2_contact_z" value="${(160.00 + 0.5*27) * 0.001}" />
 
-  <!-- This macro has for purpose to define a left leg -->
-  <xacro:macro name="leg" params="prefix is_front is_right mesh_ext
-                                  color_name color opacity">
+  <!-- Macro defining solo leg. -->
+  <xacro:macro name="leg" params="prefix is_front is_right has_side_motion
+                                  mesh_ext color_name color opacity">
 
-    <!-- Joint between the base and the ${prefix} upper leg -->
-    <joint name="${prefix}_HFE" type="revolute">
-      <parent link="base_link"/>
-      <child link="${prefix}_UPPER_LEG"/>
-      <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
-      <!-- joints rotates around the y-axis -->
-      <axis xyz="0 1 0"/>
-      <!-- placement of the joint -->
-      <xacro:if value="${is_front}">
-        <xacro:unless value="${is_right}">
-          <origin xyz="${base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
-        </xacro:unless>
-        <xacro:if value="${is_right}">
-          <origin xyz="${base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+    <xacro:if value="${has_side_motion}">
+      <joint name="${prefix}_HAA" type="revolute">
+        <parent link="base_link"/>
+        <child link="${prefix}_SHOULDER"/>
+        <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
+        <!-- joints rotates around the x-axis -->
+        <axis xyz="1 0 0"/>
+        <!-- placement of the joint -->
+        <xacro:if value="${is_front}">
+          <xacro:unless value="${is_right}">
+            <origin xyz="${base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:unless>
+          <xacro:if value="${is_right}">
+            <origin xyz="${base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:if>
         </xacro:if>
-      </xacro:if>
-      <xacro:unless value="${is_front}">
-        <xacro:unless value="${is_right}">
-          <origin xyz="${-base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
+        <xacro:unless value="${is_front}">
+          <xacro:unless value="${is_right}">
+            <origin xyz="${-base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:unless>
+          <xacro:if value="${is_right}">
+            <origin xyz="${-base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:if>
         </xacro:unless>
-        <xacro:if value="${is_right}">
-          <origin xyz="${-base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+        <!-- pybullet simulation parameters -->
+        <dynamics damping="0.0" friction="0.0"/>
+      </joint>
+      <link name="${prefix}_SHOULDER">
+        <!-- create a dummy shoulder link to join the two joints -->
+        <inertial>
+          <origin xyz="0. 0. 0." rpy="0 0 0" />
+          <!-- Adding extra weight for actuator module at shoulder. -->
+          <mass value="0.150"/>
+          <inertia ixx="0.00000001" ixy="0.0"        ixz="0.0"
+                                    iyy="0.00000001" iyz="0"
+                                                     izz="0.00000001"/>
+          </inertial>
+      </link>
+      <joint name="${prefix}_HFE" type="revolute">
+        <parent link="${prefix}_SHOULDER"/>
+        <child link="${prefix}_UPPER_LEG"/>
+        <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
+        <!-- joints rotates around the y-axis -->
+        <axis xyz="0 1 0"/>
+        <!-- placement of the joint -->
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <!-- pybullet simulation parameters -->
+        <dynamics damping="0.0" friction="0.0"/>
+      </joint>
+    </xacro:if>
+    <xacro:unless value="${has_side_motion}">
+      <!-- Joint between the base and the ${prefix} upper leg -->
+      <joint name="${prefix}_HFE" type="revolute">
+        <parent link="base_link"/>
+        <child link="${prefix}_UPPER_LEG"/>
+        <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
+        <!-- joints rotates around the y-axis -->
+        <axis xyz="0 1 0"/>
+        <!-- placement of the joint -->
+        <xacro:if value="${is_front}">
+          <xacro:unless value="${is_right}">
+            <origin xyz="${base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:unless>
+          <xacro:if value="${is_right}">
+            <origin xyz="${base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:if>
         </xacro:if>
-      </xacro:unless>
-      <!-- pybullet simulation parameters -->
-      <dynamics damping="0.0" friction="0.0"/>
-    </joint>
+        <xacro:unless value="${is_front}">
+          <xacro:unless value="${is_right}">
+            <origin xyz="${-base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:unless>
+          <xacro:if value="${is_right}">
+            <origin xyz="${-base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:if>
+        </xacro:unless>
+        <!-- pybullet simulation parameters -->
+        <dynamics damping="0.0" friction="0.0"/>
+      </joint>
+    </xacro:unless>
 
     <link name="${prefix}_UPPER_LEG">
       <!-- UPPER LEG LINK INERTIAL -->
@@ -200,7 +248,12 @@
       <parent link="${prefix}_LOWER_LEG"/>
       <child link="${prefix}_FOOT"/>
       <!-- Joint placement -->
-      <origin xyz="0 0 ${-HFE_2_KFE_z}" rpy="0 0 0" />
+      <xacro:unless value="${is_right}">
+        <origin xyz="0 ${KFE_2_FOOT_y} ${-KFE_2_FOOT_z}" rpy="0 0 0" />
+      </xacro:unless>
+      <xacro:if value="${is_right}">
+        <origin xyz="0 ${-KFE_2_FOOT_y} ${-KFE_2_FOOT_z}" rpy="0 0 0" />
+      </xacro:if>
       <!-- Limits (usefull?) -->
       <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
       <!-- pybullet simulation parameters -->
