@@ -15,7 +15,7 @@
     <!-- BASE LINK INERTIAL -->
     <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="1.43315091"/>
+        <mass value="1.63315091"/>
         <!-- The base is extremely symmetrical. -->
         <inertia ixx="0.00578574" ixy="0.0" ixz="0.0"
                                   iyy="0.01938108" iyz="0.0"
@@ -57,7 +57,7 @@
       prefix="FL"
       is_front="true"
       is_right="false"
-      has_side_motion="false"
+      has_side_motion="true"
       mesh_ext="${mesh_ext}"
       color_name="${color_name}"
       color="${color}"
@@ -68,7 +68,7 @@
       prefix="FR"
       is_front="true"
       is_right="true"
-      has_side_motion="false"
+      has_side_motion="true"
       mesh_ext="${mesh_ext}"
       color_name="${color_name}"
       color="${color}"
@@ -80,7 +80,7 @@
       prefix="HL"
       is_front="false"
       is_right="false"
-      has_side_motion="false"
+      has_side_motion="true"
       mesh_ext="${mesh_ext}"
       color_name="${color_name}"
       color="${color}"
@@ -92,7 +92,7 @@
       prefix="HR"
       is_front="false"
       is_right="true"
-      has_side_motion="false"
+      has_side_motion="true"
       mesh_ext="${mesh_ext}"
       color_name="${color_name}"
       color="${color}"
