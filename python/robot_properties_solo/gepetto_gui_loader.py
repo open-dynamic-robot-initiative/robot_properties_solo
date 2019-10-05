@@ -3,7 +3,7 @@
 """
 import eigenpy
 eigenpy.switchToNumpyMatrix()
-
+import time
 import numpy as np
 from config import SoloConfig
 from py_gepetto_gui_helper.gepetto_gui_scene import GepettoGuiScene
@@ -31,7 +31,7 @@ def display_solo_in_gepetto_gui():
     and load it in the initial configuration
     """
     # create a new window
-    # gepetto_gui_process = GepettoGuiScene.open_gepetto_gui()
+    gepetto_gui_process = GepettoGuiScene.open_gepetto_gui()
     # create a scene in it
     gui_scene = create_scene()
     # load the robot
@@ -42,7 +42,11 @@ def display_solo_in_gepetto_gui():
     # place the world frame
     world_frame = Frame(gui_scene)
 
-    return gui_scene, solo_visual, world_frame
+    # close the window after little while
+    time.sleep(5)
+    GepettoGuiScene.close_gepetto_gui(gepetto_gui_process)
+
+    return gui_scene, solo_visual, world_frame, gepetto_gui_process
 
 if __name__ == "__main__":
     display_solo_in_gepetto_gui()
