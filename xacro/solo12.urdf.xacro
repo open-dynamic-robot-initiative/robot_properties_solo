@@ -8,7 +8,7 @@
   <xacro:property name="color_name" value="grey" />
   <xacro:property name="color" value="0.8 0.8 0.8" />
   <xacro:property name="opacity" value="1.0" />
-  <xacro:property name="mesh_ext" value="obj" />
+  <xacro:property name="mesh_ext" value="stl" />
 
   <!-- This file is based on: https://atlas.is.localnet/confluence/display/AMDW/Quadruped+URDF+Files -->
   <link name="base_link">
