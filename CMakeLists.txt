@@ -31,6 +31,13 @@ find_package(catkin REQUIRED COMPONENTS
 build_xacro_files()
 
 ##############################
+# Setup the rqt perspectives #
+##############################
+
+configure_file(${PROJECT_SOURCE_DIR}/rqt/solo.perspective.in
+               ${PROJECT_SOURCE_DIR}/rqt/solo.perspective  @ONLY IMMEDIATE)
+
+##############################
 # Define the Catkin Package. #
 ##############################
 

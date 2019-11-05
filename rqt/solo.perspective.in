@@ -64,7 +64,7 @@
               "keys": {
                 "rviz_config_file": {
                   "type": "repr",
-                  "repr": "u'/home/mnaveau/devel/workspace/src/catkin/robots/robot_properties/robot_properties_solo/rviz/solo.rviz'"
+                  "repr": "u'@PROJECT_SOURCE_DIR@/rviz/solo.rviz'"
                 },
                 "hide_menu": {
                   "type": "repr",
