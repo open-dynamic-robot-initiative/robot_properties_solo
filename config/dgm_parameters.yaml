@@ -44,6 +44,9 @@ hardware_communication:
   max_missed_control: 10
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
   margin_in_control_period: 10000
+  # Angle between the next index and the home position(joint_positions=8*[0.,])
+  calibration:
+    zero_to_index_angle: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
