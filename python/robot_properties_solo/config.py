@@ -118,6 +118,7 @@ class SoloConfig(SoloAbstract):
     v0 = zero(robot_model.nv)
     a0 = zero(robot_model.nv)
 
+Solo8Config = SoloConfig
 
 class Solo12Config(SoloAbstract):
     robot_family = "solo"
