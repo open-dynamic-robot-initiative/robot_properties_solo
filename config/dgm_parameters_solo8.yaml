@@ -10,7 +10,7 @@
 
 is_real_robot: true
 device:
-  name: "solo"
+  name: "solo8"
   sensors:
     # joints data
     joint_positions:
