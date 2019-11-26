@@ -4,6 +4,11 @@
 
   <!-- See TODO: add the wiki link here -->
   <!-- These are absoulte distance value, the sign are decided below -->
+  <xacro:property name="base_2_HAA_x" value="${194.60 * 0.001}" />
+  <xacro:property name="base_2_HAA_y" value="${101.50 * 0.001}" />
+
+  <xacro:property name="HAA_2_HFE_y" value="${14.0 * 0.001}" />
+
   <xacro:property name="base_2_HFE_x" value="${190.00 * 0.001}" />
   <xacro:property name="base_2_HFE_y" value="${104.60 * 0.001}" />
 
@@ -27,33 +32,46 @@
         <!-- placement of the joint -->
         <xacro:if value="${is_front}">
           <xacro:unless value="${is_right}">
-            <origin xyz="${base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
+            <origin xyz="${base_2_HAA_x} ${base_2_HAA_y} 0" rpy="0 0 0" />
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <origin xyz="${base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+            <origin xyz="${base_2_HAA_x} ${-base_2_HAA_y} 0" rpy="0 0 0" />
           </xacro:if>
         </xacro:if>
         <xacro:unless value="${is_front}">
           <xacro:unless value="${is_right}">
-            <origin xyz="${-base_2_HFE_x} ${base_2_HFE_y} 0" rpy="0 0 0" />
+            <origin xyz="${-base_2_HAA_x} ${base_2_HAA_y} 0" rpy="0 0 0" />
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <origin xyz="${-base_2_HFE_x} ${-base_2_HFE_y} 0" rpy="0 0 0" />
+            <origin xyz="${-base_2_HAA_x} ${-base_2_HAA_y} 0" rpy="0 0 0" />
           </xacro:if>
         </xacro:unless>
         <!-- pybullet simulation parameters -->
         <dynamics damping="0.0" friction="0.0"/>
       </joint>
       <link name="${prefix}_SHOULDER">
+        <!-- TODO: Update inertias and add visuals for link. -->
         <!-- create a dummy shoulder link to join the two joints -->
-        <inertial>
-          <origin xyz="0. 0. 0." rpy="0 0 0" />
-          <!-- Adding extra weight for actuator module at shoulder. -->
-          <mass value="0.150"/>
-          <inertia ixx="0.00000001" ixy="0.0"        ixz="0.0"
-                                    iyy="0.00000001" iyz="0"
-                                                     izz="0.00000001"/>
+        <xacro:unless value="${is_right}">
+          <!-- Left upper leg inertia -->
+          <inertial>
+          <origin xyz="-0.07870700 0.01 0." rpy="0 0 0" />
+          <mass value="0.14853845"/>
+          <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
+                                    iyy="0.00041193" iyz="0.0"
+                                                     izz="0.00041107"/>
           </inertial>
+        </xacro:unless>
+        <xacro:if value="${is_right}">
+          <!-- Right upper leg inertia -->
+          <inertial>
+          <origin xyz="-0.07870700 -0.01 0." rpy="0 0 0" />
+          <mass value="0.14853845"/>
+          <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
+                                    iyy="0.00041193" iyz="0.0"
+                                                     izz="0.00041107"/>
+          </inertial>
+        </xacro:if>
       </link>
       <joint name="${prefix}_HFE" type="revolute">
         <parent link="${prefix}_SHOULDER"/>
@@ -62,7 +80,12 @@
         <!-- joints rotates around the y-axis -->
         <axis xyz="0 1 0"/>
         <!-- placement of the joint -->
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <xacro:if value="${is_right}">
+          <origin xyz="0 ${-HAA_2_HFE_y} 0" rpy="0 0 0" />
+        </xacro:if>
+        <xacro:unless value="${is_right}">
+          <origin xyz="0 ${HAA_2_HFE_y} 0" rpy="0 0 0" />
+        </xacro:unless>
         <!-- pybullet simulation parameters -->
         <dynamics damping="0.0" friction="0.0"/>
       </joint>
