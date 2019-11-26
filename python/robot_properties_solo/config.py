@@ -36,6 +36,9 @@ class SoloAbstract(object):
 
     max_qref = pi
 
+    base_link_name = 'base_link'
+    end_effector_names = ['HL_ANKLE', 'HR_ANKLE', 'FL_ANKLE', 'FR_ANKLE']
+
     @classmethod
     def buildRobotWrapper(cls):
         # Rebuild the robot wrapper instead of using the existing model to
@@ -89,6 +92,9 @@ class SoloConfig(SoloAbstract):
     # The number of motors, here they are the same as there are only revolute
     # joints.
     nb_joints = robot_model.nv - 6
+
+    joint_names = ['FL_HFE', 'FL_KFE', 'FR_HFE', 'FR_KFE', 'HL_HFE',
+                   'HL_KFE', 'HR_HFE', 'HR_KFE']
 
     # Mapping between the ctrl vector in the device and the urdf indexes.
     urdf_to_dgm = tuple(range(8))
@@ -149,6 +155,9 @@ class Solo12Config(SoloAbstract):
     # The number of motors, here they are the same as there are only revolute
     # joints.
     nb_joints = robot_model.nv - 6
+
+    joint_names = ['FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
+                   'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE']
 
     # Mapping between the ctrl vector in the device and the urdf indexes.
     urdf_to_dgm = tuple(range(12))
