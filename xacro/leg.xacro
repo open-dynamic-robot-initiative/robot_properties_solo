@@ -52,26 +52,42 @@
       <link name="${prefix}_SHOULDER">
         <!-- TODO: Update inertias and add visuals for link. -->
         <!-- create a dummy shoulder link to join the two joints -->
-        <xacro:unless value="${is_right}">
-          <!-- Left upper leg inertia -->
-          <inertial>
-          <origin xyz="-0.07870700 0.01 0." rpy="0 0 0" />
+
+        <inertial>
           <mass value="0.14853845"/>
-          <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
-                                    iyy="0.00041193" iyz="0.0"
-                                                     izz="0.00041107"/>
-          </inertial>
-        </xacro:unless>
-        <xacro:if value="${is_right}">
-          <!-- Right upper leg inertia -->
-          <inertial>
-          <origin xyz="-0.07870700 -0.01 0." rpy="0 0 0" />
-          <mass value="0.14853845"/>
-          <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
-                                    iyy="0.00041193" iyz="0.0"
-                                                     izz="0.00041107"/>
-          </inertial>
-        </xacro:if>
+          <xacro:if value="${is_front}">
+            <xacro:unless value="${is_right}">
+              <!-- Left upper leg inertia -->
+              <origin xyz="-0.07870700 0.01 0." rpy="0 0 0" />
+              <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
+                                        iyy="0.00041193" iyz="0.0"
+                                                        izz="0.00041107"/>
+            </xacro:unless>
+            <xacro:if value="${is_right}">
+              <!-- Right upper leg inertia -->
+              <origin xyz="-0.07870700 -0.01 0." rpy="0 0 0" />
+              <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
+                                        iyy="0.00041193" iyz="0.0"
+                                                        izz="0.00041107"/>
+            </xacro:if>
+          </xacro:if>
+          <xacro:unless value="${is_front}">
+            <xacro:unless value="${is_right}">
+              <!-- Left upper leg inertia -->
+              <origin xyz="0.07870700 0.01 0." rpy="0 0 0" />
+              <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
+                                        iyy="0.00041193" iyz="0.0"
+                                                        izz="0.00041107"/>
+            </xacro:unless>
+            <xacro:if value="${is_right}">
+              <!-- Right upper leg inertia -->
+              <origin xyz="0.07870700 -0.01 0." rpy="0 0 0" />
+              <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
+                                        iyy="0.00041193" iyz="0.0"
+                                                        izz="0.00041107"/>
+            </xacro:if>
+          </xacro:unless>
+        </inertial>
       </link>
       <joint name="${prefix}_HFE" type="revolute">
         <parent link="${prefix}_SHOULDER"/>
