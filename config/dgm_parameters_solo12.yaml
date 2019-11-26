@@ -1,12 +1,12 @@
-# 
+#
 # @file dgm_parameters_solo12.yaml
 # @author Maximilien Naveau (maximilien.naveau@gmail.com)
 # @license License BSD-3-Clause
 # @copyright Copyright (c) 2019, New York University and Max Planck Gesellschaft.
 # @date 2019-05-22
-# 
+#
 # @brief Define the interface between the control and the hardware
-# 
+#
 
 is_real_robot: true
 device:
@@ -27,7 +27,7 @@ device:
     contact_sensors:
       size: 4
     slider_positions:
-      size: 2
+      size: 4
     # robot status
     motor_enabled:
       size: 12
