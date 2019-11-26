@@ -72,7 +72,7 @@ class SoloConfig(SoloAbstract):
     yaml_path = (
         join(rospkg.RosPack().get_path("robot_properties_" + robot_name),
              "config",
-             "dgm_parameters.yaml")
+             "dgm_parameters_solo8.yaml")
     )
 
     # The inertia of a single blmc_motor.
@@ -135,7 +135,7 @@ class Solo12Config(SoloAbstract):
     yaml_path = (
         join(rospkg.RosPack().get_path("robot_properties_" + robot_family),
              "config",
-             "dgm_parameters.yaml")
+             "dgm_parameters_solo12.yaml")
     )
 
     # The inertia of a single blmc_motor.
