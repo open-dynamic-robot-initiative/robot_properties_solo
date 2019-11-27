@@ -87,6 +87,8 @@ class SoloConfig(SoloAbstract):
     robot_model.rotorInertia[6:] = motor_inertia
     robot_model.rotorGearRatio[6:] = motor_gear_ration
 
+    mass = np.sum([i.mass for i in robot_model.inertias])
+
     base_name = robot_model.frames[2].name
 
     # The number of motors, here they are the same as there are only revolute
@@ -149,6 +151,8 @@ class Solo12Config(SoloAbstract):
                                          se3.JointModelFreeFlyer())
     robot_model.rotorInertia[6:] = motor_inertia
     robot_model.rotorGearRatio[6:] = motor_gear_ration
+
+    mass = np.sum([i.mass for i in robot_model.inertias])
 
     base_name = robot_model.frames[2].name
 
