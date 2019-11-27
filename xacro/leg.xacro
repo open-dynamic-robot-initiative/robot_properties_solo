@@ -5,7 +5,7 @@
   <!-- See TODO: add the wiki link here -->
   <!-- These are absoulte distance value, the sign are decided below -->
   <xacro:property name="base_2_HAA_x" value="${194.60 * 0.001}" />
-  <xacro:property name="base_2_HAA_y" value="${101.50 * 0.001}" />
+  <xacro:property name="base_2_HAA_y" value="${87.50 * 0.001}" />
 
   <xacro:property name="HAA_2_HFE_y" value="${14.0 * 0.001}" />
 
