@@ -15,7 +15,7 @@
     <!-- BASE LINK INERTIAL -->
     <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="1.63315091"/>
+        <mass value="1.36115091"/>
         <!-- The base is extremely symmetrical. -->
         <inertia ixx="0.00578574" ixy="0.0" ixz="0.0"
                                   iyy="0.01938108" iyz="0.0"
