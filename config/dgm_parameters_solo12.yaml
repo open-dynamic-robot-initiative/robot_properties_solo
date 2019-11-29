@@ -45,11 +45,12 @@ hardware_communication:
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
   maximum_time_for_user_cmd: 100000
   # Angle between the next index and the home position(joint_positions=12*[0.,])
+  interface_name: "ens4"
   calibration:
-    index_to_zero_angle: [0.0, 0.0, 0.0,   # HAA, HFE, KFE
-                          0.0, 0.0, 0.0,   # HAA, HFE, KFE
-                          0.0, 0.0, 0.0,   # HAA, HFE, KFE
-                          0.0, 0.0, 0.0,]  # HAA, HFE, KFE
+    index_to_zero_angle: [0.0, 0.0, 0.0,   # FL: HAA, HFE, KFE
+                          0.0, 0.0, 0.0,   # FR: HAA, HFE, KFE
+                          0.0, 0.0, 0.0,   # HL: HAA, HFE, KFE
+                          0.0, 0.0, 0.0,]  # HR: HAA, HFE, KFE
 
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
