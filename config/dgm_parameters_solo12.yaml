@@ -24,10 +24,8 @@ device:
     joint_encoder_index:
       size: 12
     # additional data
-    contact_sensors:
-      size: 4
     slider_positions:
-      size: 2
+      size: 4
     # robot status
     motor_enabled:
       size: 12
