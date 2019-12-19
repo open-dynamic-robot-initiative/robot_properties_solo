@@ -44,10 +44,10 @@ hardware_communication:
   maximum_time_for_user_cmd: 100000
   # Angle between the next index and the home position(joint_positions=12*[0.,])
   calibration:
-    index_to_zero_angle: [0.0, 0.0, 0.0,   # HAA, HFE, KFE
-                          0.0, 0.0, 0.0,   # HAA, HFE, KFE
-                          0.0, 0.0, 0.0,   # HAA, HFE, KFE
-                          0.0, 0.0, 0.0,]  # HAA, HFE, KFE
+    # 'FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
+    # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
+    index_to_zero_angle: [-0.027374, -0.067824, -0.167136, -0.193691, -0.097606, -0.320954, 0.043991, -0.018865, 0.144539, -0.058447, 0.029257, -0.088556, ]
+  network_id: "ens4"
 
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
