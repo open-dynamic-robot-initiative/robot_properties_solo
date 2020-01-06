@@ -46,7 +46,7 @@ hardware_communication:
   calibration:
     # 'FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
     # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
-    index_to_zero_angle: [-0.027374, -0.067824, -0.167136, -0.193691, -0.097606, -0.320954, 0.043991, -0.018865, 0.144539, -0.058447, 0.029257, -0.088556, ]
+    index_to_zero_angle: [-0.103810, -0.418661, -0.139920, -0.472622, -0.204885, -0.609037, -0.160548, -0.047947, -0.515913, -0.246955, -0.072043, -0.060415, ]
   network_id: "ens4"
 
 motor_I: 0.045     # The inertia of a single blmc_motor
