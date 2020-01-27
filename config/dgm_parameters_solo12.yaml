@@ -1,12 +1,12 @@
-# 
+#
 # @file dgm_parameters_solo12.yaml
 # @author Maximilien Naveau (maximilien.naveau@gmail.com)
 # @license License BSD-3-Clause
 # @copyright Copyright (c) 2019, New York University and Max Planck Gesellschaft.
 # @date 2019-05-22
-# 
+#
 # @brief Define the interface between the control and the hardware
-# 
+#
 
 is_real_robot: true
 device:
@@ -46,8 +46,22 @@ hardware_communication:
   calibration:
     # 'FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
     # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
-    index_to_zero_angle: [-0.103810, -0.418661, -0.139920, -0.472622, -0.204885, -0.609037, -0.160548, -0.047947, -0.515913, -0.246955, -0.072043, -0.060415, ]
+    index_to_zero_angle: [
+      # -0.092058, -0.418661, -0.139920,
+      # -0.475446, -0.100885, -0.609037,
+      # 0.0438325, -0.047947, -0.515913,
+      # -0.327734, -0.072043, -0.060415,
+      # -0.2151716, 	-0.49650893,	-0.49631558,
+      # -0.63241622,	-0.08984602,	-0.59067588,
+      # -0.33303474,	-0.31225176,	-0.5112941,
+      # -0.05345688,	-0.07230607,	-0.01956246
+      -0.48348315, 	-0.49650893,	-0.49631558,
+      -0.06397195, 	-0.08984602,	-0.59067588,
+      -0.36711937,	-0.31225176,	-0.5112941,
+      -0.64484917,	-0.07230607,	-0.01956246
+    ]
   network_id: "ens4"
+  serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
 
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
