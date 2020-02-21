@@ -1,12 +1,12 @@
-# 
+#
 # @file dgm_parameters_solo8.yaml
 # @author Maximilien Naveau (maximilien.naveau@gmail.com)
 # @license License BSD-3-Clause
 # @copyright Copyright (c) 2019, New York University and Max Planck Gesellschaft.
 # @date 2019-05-22
-# 
+#
 # @brief Define the interface between the control and the hardware
-# 
+#
 
 is_real_robot: true
 device:
@@ -47,6 +47,7 @@ hardware_communication:
   # Angle between the next index and the home position(joint_positions=8*[0.,])
   calibration:
     index_to_zero_angle: [-0.186647, -0.660243, -0.152683, -0.346495, -0.258462, -0.230566, -0.265664, -0.380564, ]
+  network_id: "eno1"
 
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
