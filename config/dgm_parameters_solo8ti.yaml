@@ -1,0 +1,53 @@
+#
+# @file dgm_parameters_solo8.yaml
+# @author Maximilien Naveau (maximilien.naveau@gmail.com)
+# @license License BSD-3-Clause
+# @copyright Copyright (c) 2019, New York University and Max Planck Gesellschaft.
+# @date 2019-05-22
+#
+# @brief Define the interface between the control and the hardware
+#
+
+is_real_robot: true
+device:
+  name: "solo8ti"
+  sensors:
+    # joints data
+    joint_positions:
+      size: 8
+    joint_velocities:
+      size: 8
+    joint_torques:
+      size: 8
+    joint_target_torques:
+      size: 8
+    joint_encoder_index:
+      size: 8
+    # additional data
+    contact_sensors:
+      size: 4
+    slider_positions:
+      size: 4
+    # robot status
+    motor_enabled:
+      size: 8
+    motor_ready:
+      size: 8
+    motor_board_enabled:
+      size: 4
+    motor_board_errors:
+      size: 4
+  controls:
+    ctrl_joint_torques:
+      size: 8
+hardware_communication:
+  max_missed_control: 10
+  control_period: 1000000 # in nano second this means 1ms <=> 1kz
+  maximum_time_for_user_cmd: 100000
+  # Angle between the next index and the home position(joint_positions=8*[0.,])
+  calibration:
+    index_to_zero_angle: [-0.186647, -0.660243, -0.152683, -0.346495, -0.258462, -0.230566, -0.265664, -0.380564, ]
+
+motor_I: 0.045     # The inertia of a single blmc_motor
+motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
+motor_gear_ratio: 9 # On the quadruped the gear ration is 1:9
