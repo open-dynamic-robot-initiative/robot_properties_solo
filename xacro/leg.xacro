@@ -88,25 +88,34 @@
         </visual>
         <!-- HAA LINK COLLISION -->
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
                 <xacro:unless value="${is_right}">
-                    <xacro:if value="${is_front}">
+                <xacro:if value="${is_front}">
+                    <origin xyz="0.01950 0 0" rpy="0 0 0" />
+                    <geometry>
                         <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/solo12/solo12_hip_fe_fl.${mesh_ext}"/>
-                    </xacro:if>
-                    <xacro:unless value="${is_front}">
-                        <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/solo12/solo12_hip_fe_hl.${mesh_ext}"/>
-                    </xacro:unless>
-                </xacro:unless>
-                <xacro:if value="${is_right}">
-                    <xacro:if value="${is_front}">
-                        <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/solo12/solo12_hip_fe_fr.${mesh_ext}"/>
-                    </xacro:if>
-                    <xacro:unless value="${is_front}">
-                        <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/solo12/solo12_hip_fe_hr.${mesh_ext}"/>
-                    </xacro:unless>
+                    </geometry>
                 </xacro:if>
-            </geometry>
+                <xacro:unless value="${is_front}">
+                    <origin xyz="-0.01950 0 0" rpy="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/solo12/solo12_hip_fe_hl.${mesh_ext}"/>
+                    </geometry>
+                </xacro:unless>
+            </xacro:unless>
+            <xacro:if value="${is_right}">
+                <xacro:if value="${is_front}">
+                    <origin xyz="0.01950 0 0" rpy="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/solo12/solo12_hip_fe_fr.${mesh_ext}"/>
+                    </geometry>
+                </xacro:if>
+                <xacro:unless value="${is_front}">
+                    <origin xyz="-0.01950 0 0" rpy="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://robot_properties_solo/meshes/${mesh_ext}/solo12/solo12_hip_fe_hr.${mesh_ext}"/>
+                    </geometry>
+                </xacro:unless>
+            </xacro:if>
             <material name="${color_name}">
                 <color rgba="${color} ${opacity}"/>
             </material>
@@ -115,14 +124,14 @@
           <mass value="0.14853845"/>
           <xacro:if value="${is_front}">
             <xacro:unless value="${is_right}">
-              <!-- Left upper leg inertia -->
+              <!-- HAA body inertia -->
               <origin xyz="-0.07870700 0.01 0." rpy="0 0 0" />
               <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
                                         iyy="0.00041193" iyz="0.0"
                                                         izz="0.00041107"/>
             </xacro:unless>
             <xacro:if value="${is_right}">
-              <!-- Right upper leg inertia -->
+              <!-- HAA body inertia -->
               <origin xyz="-0.07870700 -0.01 0." rpy="0 0 0" />
               <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
                                         iyy="0.00041193" iyz="0.0"
@@ -131,14 +140,14 @@
           </xacro:if>
           <xacro:unless value="${is_front}">
             <xacro:unless value="${is_right}">
-              <!-- Left upper leg inertia -->
+              <!-- HAA body inertia -->
               <origin xyz="0.07870700 0.01 0." rpy="0 0 0" />
               <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
                                         iyy="0.00041193" iyz="0.0"
                                                         izz="0.00041107"/>
             </xacro:unless>
             <xacro:if value="${is_right}">
-              <!-- Right upper leg inertia -->
+              <!-- HAA body inertia -->
               <origin xyz="0.07870700 -0.01 0." rpy="0 0 0" />
               <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
                                         iyy="0.00041193" iyz="0.0"
