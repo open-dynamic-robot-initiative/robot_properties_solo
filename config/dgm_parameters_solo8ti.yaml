@@ -10,7 +10,7 @@
 
 is_real_robot: true
 device:
-  name: "solo8"
+  name: "solo8ti"
   sensors:
     # joints data
     joint_positions:
@@ -47,7 +47,6 @@ hardware_communication:
   # Angle between the next index and the home position(joint_positions=8*[0.,])
   calibration:
     index_to_zero_angle: [-0.186647, -0.660243, -0.152683, -0.346495, -0.258462, -0.230566, -0.265664, -0.380564, ]
-  network_id: "eno1"
 
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
