@@ -21,9 +21,12 @@ class Quadruped12Robot(PinBulletWrapper):
         p.setPhysicsEngineParameter(fixedTimeStep=dt, numSubSteps=1)
         return physicsClient
 
-    def __init__(self, physicsClient=None):
+    def __init__(self, physicsClient=None, ifrecord = False):
         if physicsClient is None:
             self.physicsClient = self.initPhysicsClient()
+        
+        if ifrecord:
+            p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, "solo.mp4")
 
         # Load the plain.
         plain_urdf = (rospkg.RosPack().get_path("robot_properties_solo") +
@@ -74,7 +77,6 @@ class Quadruped12Robot(PinBulletWrapper):
         self.pin_robot.computeJointJacobians(q)
         self.pin_robot.framesForwardKinematics(q)
         self.pin_robot.centroidalMomentum(q, dq)
-
 
 if __name__ == "__main__":
     # Create a robot instance. This initializes the simulator as well.

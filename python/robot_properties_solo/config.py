@@ -178,7 +178,7 @@ class Solo12Config(SoloAbstract):
 
 
     # Define the initial state.
-    initial_configuration = [0.2, 0., 0.3, 0., 0., 0., 1.] + 2*[0., 0.8, -1.6] + 2*[0., -0.8, 1.6]
+    initial_configuration = [0.2, 0., 0.25, 0., 0., 0., 1.] + 2*[0., 0.8, -1.6] + 2*[0., -0.8, 1.6]
     initial_velocity = (8 + 4 + 6)*[0,]
 
     q0 = zero(robot_model.nq)
