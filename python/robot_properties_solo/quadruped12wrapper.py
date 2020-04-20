@@ -76,10 +76,11 @@ class Quadruped12Robot(PinBulletWrapper):
         self.pin_robot.centroidalMomentum(q, dq)
 
     def start_recording(self, file_name):
-        p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, file_name + ".mp4")
+        self.file_name = file_name
+        p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, self.file_name)
 
-    def stop_recording(self, file_name):
-        p.stopStateLogging(p.STATE_LOGGING_VIDEO_MP4, file_name + ".mp4")
+    def stop_recording(self):
+        p.stopStateLogging(p.STATE_LOGGING_VIDEO_MP4, self.file_name)
 
 if __name__ == "__main__":
     # Create a robot instance. This initializes the simulator as well.
