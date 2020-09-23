@@ -47,10 +47,10 @@ hardware_communication:
     # 'FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
     # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
     index_to_zero_angle: [
-      -0.504964, -0.526149, -0.367817,
-      -0.402358, -0.086812, -0.532775,
-      -0.369107, -0.050981, -0.662285,
-      -0.651754, -0.033092, -0.399080
+      -0.434071, -0.526149, -0.367817,
+      -0.414806, -0.222999, -0.329494,
+      -0.369107, -0.096331, -0.662285,
+      -0.651754, -0.064111, -0.399080
     ]
   network_id: "ens4"
   serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
