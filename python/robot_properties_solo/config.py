@@ -56,21 +56,22 @@ class SoloAbstract(object):
 
 
 class SoloConfig(SoloAbstract):
-    robot_name = "solo"
+    robot_family = "solo"
+    robot_name = "solo8"
 
     # Here we use the same urdf as for the quadruped but without the freeflyer.
     urdf_path = (
-        join(rospkg.RosPack().get_path("robot_properties_" + robot_name),
+        join(rospkg.RosPack().get_path("robot_properties_" + robot_family),
              "urdf",
-             robot_name + ".urdf")
+             "solo.urdf")
     )
 
     meshes_path = [
-      dirname(rospkg.RosPack().get_path("robot_properties_" + robot_name))
+      dirname(rospkg.RosPack().get_path("robot_properties_" + robot_family))
     ]
 
     yaml_path = (
-        join(rospkg.RosPack().get_path("robot_properties_" + robot_name),
+        join(rospkg.RosPack().get_path("robot_properties_" + robot_family),
              "config",
              "dgm_parameters_solo8.yaml")
     )
