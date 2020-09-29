@@ -26,6 +26,16 @@ device:
     # additional data
     slider_positions:
       size: 4
+    imu_accelerometer:
+      size: 3
+    imu_gyroscope:
+      size: 3
+    imu_attitude:
+      size: 3
+    imu_linear_acceleration:
+      size: 3
+    imu_attitude_quaternion:
+      size: 4
     # robot status
     motor_enabled:
       size: 12
