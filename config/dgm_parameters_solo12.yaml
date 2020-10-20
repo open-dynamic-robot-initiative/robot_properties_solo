@@ -53,14 +53,15 @@ hardware_communication:
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
   maximum_time_for_user_cmd: 100000
   # Angle between the next index and the home position(joint_positions=12*[0.,])
+  # NOTE: FR_HAA and HR_HAA are rotating in the other direction.
   calibration:
     # 'FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
     # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
     index_to_zero_angle: [
-      -0.424071, -0.458655, -0.367817,
-      -0.763952, -0.315982, -0.329494,
+      -0.435291, -0.487721, -0.367817,
+      -0.070000, -0.342973, -0.447689,
       -0.369107, -0.096331, -0.662285,
-      -0.651754, -0.064111, -0.399080
+      +0.092616, -0.557637, -0.380633
     ]
   network_id: "ens4"
   serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
