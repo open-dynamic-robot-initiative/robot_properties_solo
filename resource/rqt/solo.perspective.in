@@ -64,7 +64,7 @@
               "keys": {
                 "rviz_config_file": {
                   "type": "repr",
-                  "repr": "u'@PROJECT_SOURCE_DIR@/rviz/solo.rviz'"
+                  "repr": "u'@INSTALL_DIR@/rviz/solo.rviz'"
                 },
                 "hide_menu": {
                   "type": "repr",

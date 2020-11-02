@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """ Basic loading and visualization for the Solo robot using gepetto viewer. """
 
 import numpy as np
@@ -17,14 +19,14 @@ robot.initDisplay(loadModel=True)
 q = np.matrix(Solo12Config.initial_configuration).T
 
 # Turn the legs outside
-q[[10, 16]] = -0.5 # Right side of quadruped
-q[[ 7, 13]] = 0.5  # Left side of quadruped
+q[[10, 16]] = -0.5  # Right side of quadruped
+q[[7, 13]] = 0.5  # Left side of quadruped
 
 # Display the configuration in the viewer.
 robot.display(q)
 
 # Example of moving the robot forward and updating the display every time.
 for i in range(10):
-  q[0] += 0.05
-  robot.display(q)
-  time.sleep(0.2)
+    q[0] += 0.05
+    robot.display(q)
+    time.sleep(0.2)
