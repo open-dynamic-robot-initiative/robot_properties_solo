@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 
-""" Basic loading and visualization for the Solo robot using gepetto viewer. """
+"""demo_display_solo8
+
+Basic loading and visualization for the Solo8 robot using gepetto viewer.
+
+license: BSD 3-Clause License
+copyrights: Copyright (C) 2018-2019, New York University , Max Planck Gesellschaft
+Copyright note valid unless otherwise stated in individual files.
+All rights reserved.
+"""
 
 
 def with_gepetto_gui_helper():

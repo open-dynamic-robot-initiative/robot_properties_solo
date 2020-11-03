@@ -1,12 +1,19 @@
+"""solo8wrapper
+
+Solo8 pybullet interface using pinocchio's convention.
+
+License: BSD 3-Clause License
+Copyright (C) 2018-2019, New York University , Max Planck Gesellschaft
+Copyright note valid unless otherwise stated in individual files.
+All rights reserved.
+"""
+
 import numpy as np
-
 import time
-from ament_index_python.packages import get_package_share_directory
 import os
-import pybullet as p
-import pinocchio as se3
-
-from py_pinocchio_bullet.wrapper import PinBulletWrapper
+import pybullet
+from ament_index_python.packages import get_package_share_directory
+from pinocchio_bullet.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo8Config
 
 
@@ -16,9 +23,9 @@ dt = 1e-3
 class Solo8Robot(PinBulletWrapper):
     @staticmethod
     def initPhysicsClient():
-        physicsClient = p.connect(p.GUI)
-        p.setGravity(0, 0, -9.81)
-        p.setPhysicsEngineParameter(fixedTimeStep=dt, numSubSteps=1)
+        physicsClient = pybullet.connect(pybullet.GUI)
+        pybullet.setGravity(0, 0, -9.81)
+        pybullet.setPhysicsEngineParameter(fixedTimeStep=dt, numSubSteps=1)
         return physicsClient
 
     def __init__(self, physicsClient=None):
@@ -31,31 +38,31 @@ class Solo8Robot(PinBulletWrapper):
             "urdf",
             "plane_with_restitution.urdf",
         )
-        self.planeId = p.loadURDF(plain_urdf)
+        self.planeId = pybullet.loadURDF(plain_urdf)
 
         # Load the robot
         robotStartPos = [0.0, 0, 0.40]
-        robotStartOrientation = p.getQuaternionFromEuler([0, 0, 0])
+        robotStartOrientation = pybullet.getQuaternionFromEuler([0, 0, 0])
 
         self.urdf_path = Solo8Config.urdf_path
-        self.robotId = p.loadURDF(
+        self.robotId = pybullet.loadURDF(
             self.urdf_path,
             robotStartPos,
             robotStartOrientation,
-            flags=p.URDF_USE_INERTIA_FROM_FILE,
+            flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
             useFixedBase=False,
         )
-        p.getBasePositionAndOrientation(self.robotId)
+        pybullet.getBasePositionAndOrientation(self.robotId)
 
         # Create the robot wrapper in pinocchio.
         package_dirs = [os.path.dirname(os.path.dirname(self.urdf_path)) + "/urdf"]
         self.pin_robot = Solo8Config.buildRobotWrapper()
 
         # Query all the joints.
-        num_joints = p.getNumJoints(self.robotId)
+        num_joints = pybullet.getNumJoints(self.robotId)
 
         for ji in range(num_joints):
-            p.changeDynamics(
+            pybullet.changeDynamics(
                 self.robotId,
                 ji,
                 linearDamping=0.04,
@@ -88,31 +95,3 @@ class Solo8Robot(PinBulletWrapper):
         self.pin_robot.computeJointJacobians(q)
         self.pin_robot.framesForwardKinematics(q)
         self.pin_robot.centroidalMomentum(q, dq)
-
-
-if __name__ == "__main__":
-    # Create a robot instance. This initializes the simulator as well.
-    robot = Solo8Robot()
-    tau = np.zeros(8)
-
-    # Reset the robot to some initial state.
-    q0 = np.matrix(Solo8Config.initial_configuration).T
-    dq0 = np.matrix(Solo8Config.initial_velocity).T
-    robot.reset_state(q0, dq0)
-
-    # Run the simulator for 100 steps
-    for i in range(230):
-        # TODO: Implement a controller here.
-        robot.send_joint_command(tau)
-
-        # Step the simulator.
-        p.stepSimulation()
-        # time.sleep(0.001) # You can sleep here if you want to slow down the replay
-
-    # Read the final state and forces after the stepping.
-    q, dq = robot.get_state()
-    active_eff, forces = robot.get_force()
-    print("q", q)
-    print("dq", dq)
-    print("active eff", active_eff)
-    print("forces", forces)

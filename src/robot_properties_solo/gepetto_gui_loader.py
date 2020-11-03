@@ -2,7 +2,6 @@
 
 """
 import eigenpy
-eigenpy.switchToNumpyMatrix()
 import time
 from config import SoloConfig
 from py_gepetto_gui_helper.gepetto_gui_scene import GepettoGuiScene

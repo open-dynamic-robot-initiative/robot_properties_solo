@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 
-""" Basic loading of the Solo robot with the srdf file. Example of collision checking and display with gepetto-gui. """
+"""demo_solo12_collision_detection
+
+Basic loading of the Solo robot with the srdf file.
+Example of collision checking and display with gepetto-gui.
+
+License: BSD 3-Clause License
+Copyright (C) 2018-2019, New York University , Max Planck Gesellschaft
+Copyright note valid unless otherwise stated in individual files.
+All rights reserved.
+"""
+
+"""  """
 
 import pinocchio as pin
 import numpy as np

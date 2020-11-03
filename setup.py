@@ -120,11 +120,10 @@ data_files_to_install += [
 data_files_to_install += [(path.join("share", package_name), ["package.xml"])]
 
 # Install nodes and demos.
-scripts_list = [
-    path.join("demos", "demo_display_solo.py"),
-    path.join("demos", "demo_display_solo12.py"),
-    path.join("demos", "demo_solo12_collision_detection.py")
-]
+scripts_list = []
+for (root, _, files) in walk(path.join("demos")):
+    for demo_file in files:
+        scripts_list.append(path.join(root, demo_file))
 
 # Final setup.
 setup(
