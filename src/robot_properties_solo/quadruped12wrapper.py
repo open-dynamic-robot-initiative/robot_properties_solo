@@ -102,7 +102,7 @@ class Solo12Robot(PinBulletWrapper):
         pybullet.stopStateLogging(pybullet.STATE_LOGGING_VIDEO_MP4, self.file_name)
 
 
-class DeprecationHelper(object):
+class Quadruped12RobotDeprecationHelper(object):
     """ Class to deprecate the Quadruped12Robot preserving inheritance. """
 
     def __init__(self, new_target):
@@ -125,4 +125,4 @@ class DeprecationHelper(object):
         return getattr(self.new_target, attr)
 
 
-Quadruped12Robot = DeprecationHelper(Solo12Robot)
+Quadruped12Robot = Quadruped12RobotDeprecationHelper(Solo12Robot)

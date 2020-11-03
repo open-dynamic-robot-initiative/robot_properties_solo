@@ -68,7 +68,7 @@ class SoloAbstract(object):
         return joint_names
 
 
-class SoloConfig(SoloAbstract):
+class Solo8Config(SoloAbstract):
     robot_family = "solo"
     robot_name = "solo8"
 
@@ -80,7 +80,7 @@ class SoloConfig(SoloAbstract):
     )
 
     meshes_path = [
-      dirname(rospkg.RosPack().get_path("robot_properties_" + robot_family))
+        dirname(get_package_share_directory("robot_properties_" + robot_family))
     ]
 
     yaml_path = join(
@@ -146,7 +146,30 @@ class SoloConfig(SoloAbstract):
     a0 = zero(robot_model.nv)
 
 
-Solo8Config = SoloConfig
+class Solo8ConfigDeprecationHelper(object):
+    """ Class to deprecate the Quadruped12Robot preserving inheritance. """
+
+    def __init__(self, new_target):
+        self.new_target = new_target
+
+    def _warn(self):
+        from warnings import warn
+
+        warn(
+            "SoloConfig class name is deprecated, please use:\n"
+            "    from robot_properties_solo.config import Solo8Config"
+        )
+
+    def __call__(self, *args, **kwargs):
+        self._warn()
+        return self.new_target(*args, **kwargs)
+
+    def __getattr__(self, attr):
+        self._warn()
+        return getattr(self.new_target, attr)
+
+
+SoloConfig = Solo8ConfigDeprecationHelper(Solo8Config)
 
 
 class Solo12Config(SoloAbstract):
