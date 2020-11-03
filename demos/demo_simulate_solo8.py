@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     # Create a robot instance. This initializes the simulator as well.
     robot = Solo8Robot()
-    tau = np.zeros(8)
+    tau = np.zeros(robot.nb_dof)
 
     # Reset the robot to some initial state.
     q0 = np.matrix(Solo8Config.initial_configuration).T
