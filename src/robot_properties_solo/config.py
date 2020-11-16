@@ -85,7 +85,7 @@ class Solo8Config(SoloAbstract):
 
     yaml_path = join(
         get_package_share_directory("robot_properties_" + robot_family),
-        "config",
+        "dynamic_graph_manager",
         "dgm_parameters_solo8.yaml",
     )
 
@@ -189,7 +189,7 @@ class Solo12Config(SoloAbstract):
 
     yaml_path = join(
         get_package_share_directory("robot_properties_" + robot_family),
-        "config",
+        "dynamic_graph_manager",
         "dgm_parameters_solo12.yaml",
     )
 
