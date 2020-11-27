@@ -19,7 +19,7 @@ device:
       size: 8
     joint_torques:
       size: 8
-    joint_target_torques:
+    joint_target_torques: 
       size: 8
     joint_encoder_index:
       size: 8
@@ -40,6 +40,17 @@ device:
   controls:
     ctrl_joint_torques:
       size: 8
+    ctrl_joint_desired_position:
+      size: 8
+    ctrl_joint_desired_velocity:
+      size: 8
+    ctrl_joint_torque_saturation:
+      size: 8
+    ctrl_desired_kp:
+      size: 8
+    ctrl_desired_kd:
+      size: 8
+
 hardware_communication:
   max_missed_control: 10
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
@@ -47,7 +58,7 @@ hardware_communication:
   # Angle between the next index and the home position(joint_positions=8*[0.,])
   calibration:
     index_to_zero_angle: [-0.186647, -0.660243, -0.152683, -0.346495, -0.258462, -0.230566, -0.265664, -0.380564, ]
-  network_id: "eno1"
+  network_id: "ens3"
 
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
