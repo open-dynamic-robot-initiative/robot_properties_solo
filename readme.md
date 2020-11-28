@@ -1,21 +1,22 @@
-# Robot Properties Solo
+Robot Properties Solo
+---------------------
 
-## What it is
+### What it is
 
 URDF and ROS integration of the Solo BLMC robot
 
-## Authors
+### Authors
 
 - Felix Grimmiger
 - Maximilien Naveau
 - Avadesh Meduri
 - Julian Viereck
 
-## Copyrights
+### Copyrights
 
 Copyright(c) 2018-2019 Max Planck Gesellschaft, New York University
 
-## License
+### License
 
 BSD 3-Clause License
 

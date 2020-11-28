@@ -1,8 +1,14 @@
+"""gepetto_gui_loader
+
+Load the robot in the gepetto-gui.
+
+License: BSD 3-Clause License
+Copyright (C) 2018-2019, New York University , Max Planck Gesellschaft
+Copyright note valid unless otherwise stated in individual files.
+All rights reserved.
 """
 
-"""
 import eigenpy
-eigenpy.switchToNumpyMatrix()
 import time
 from config import SoloConfig
 from py_gepetto_gui_helper.gepetto_gui_scene import GepettoGuiScene

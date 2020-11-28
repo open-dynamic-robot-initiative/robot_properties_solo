@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+"""gepetto_gui_visualization
+
+Visualize the robot
+
+License: BSD 3-Clause License
+Copyright (C) 2018-2019, New York University , Max Planck Gesellschaft
+Copyright note valid unless otherwise stated in individual files.
+All rights reserved.
+"""
+
+from robot_properties_solo.gepetto_gui_loader import display_solo_in_gepetto_gui
+
+if __name__ == "__main__":
+
+    display_solo_in_gepetto_gui()
