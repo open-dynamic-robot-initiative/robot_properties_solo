@@ -140,10 +140,10 @@ class Solo8Config(SoloAbstract):
         0,
     ]
 
-    q0 = zero(robot_model.nq)
+    q0 = np.zeros(robot_model.nq)
     q0[:] = initial_configuration
-    v0 = zero(robot_model.nv)
-    a0 = zero(robot_model.nv)
+    v0 = np.zeros(robot_model.nv)
+    a0 = np.zeros(robot_model.nv)
 
 
 class Solo8ConfigDeprecationHelper(object):
@@ -252,7 +252,7 @@ class Solo12Config(SoloAbstract):
         0,
     ]
 
-    q0 = zero(robot_model.nq)
+    q0 = np.zeros(robot_model.nq)
     q0[:] = initial_configuration
-    v0 = zero(robot_model.nv)
-    a0 = zero(robot_model.nv)
+    v0 = np.zeros(robot_model.nv)
+    a0 = np.zeros(robot_model.nv)
