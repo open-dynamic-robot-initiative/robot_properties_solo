@@ -10,13 +10,12 @@ All rights reserved.
 
 import numpy as np
 from math import pi
-from ament_index_python.packages import get_package_share_directory
 from os.path import join, dirname
 from os import environ
 import pinocchio as se3
 from pinocchio.utils import zero
 from pinocchio.robot_wrapper import RobotWrapper
-
+from robot_properties_solo.utils import find_paths
 
 class SoloAbstract(object):
     """ Abstract class used for all Solo robots. """
@@ -72,22 +71,10 @@ class Solo8Config(SoloAbstract):
     robot_family = "solo"
     robot_name = "solo8"
 
-    # Here we use the same urdf as for the quadruped but without the freeflyer.
-    urdf_path = join(
-        get_package_share_directory("robot_properties_" + robot_family),
-        "urdf",
-        robot_family + ".urdf",
-    )
-
-    meshes_path = [
-        dirname(get_package_share_directory("robot_properties_" + robot_family))
-    ]
-
-    yaml_path = join(
-        get_package_share_directory("robot_properties_" + robot_family),
-        "dynamic_graph_manager",
-        "dgm_parameters_solo8.yaml",
-    )
+    paths = find_paths(robot_name)
+    meshes_path = paths["resources"]
+    yaml_path = paths["dgm_yaml"]
+    urdf_path = paths["urdf"]
 
     # The inertia of a single blmc_motor.
     motor_inertia = 0.0000045
@@ -140,10 +127,10 @@ class Solo8Config(SoloAbstract):
         0,
     ]
 
-    q0 = np.zeros(robot_model.nq)
+    q0 = zero(robot_model.nq)
     q0[:] = initial_configuration
-    v0 = np.zeros(robot_model.nv)
-    a0 = np.zeros(robot_model.nv)
+    v0 = zero(robot_model.nv)
+    a0 = zero(robot_model.nv)
 
 
 class Solo8ConfigDeprecationHelper(object):
@@ -176,22 +163,10 @@ class Solo12Config(SoloAbstract):
     robot_family = "solo"
     robot_name = "solo12"
 
-    # Here we use the same urdf as for the quadruped but without the freeflyer.
-    urdf_path = join(
-        get_package_share_directory("robot_properties_" + robot_family),
-        "urdf",
-        robot_name + ".urdf",
-    )
-
-    meshes_path = [
-        dirname(get_package_share_directory("robot_properties_" + robot_family))
-    ]
-
-    yaml_path = join(
-        get_package_share_directory("robot_properties_" + robot_family),
-        "dynamic_graph_manager",
-        "dgm_parameters_solo12.yaml",
-    )
+    paths = find_paths(robot_name)
+    meshes_path = paths["resources"]
+    yaml_path = paths["dgm_yaml"]
+    urdf_path = paths["urdf"]
 
     # The inertia of a single blmc_motor.
     motor_inertia = 0.0000045
@@ -252,7 +227,7 @@ class Solo12Config(SoloAbstract):
         0,
     ]
 
-    q0 = np.zeros(robot_model.nq)
+    q0 = zero(robot_model.nq)
     q0[:] = initial_configuration
-    v0 = np.zeros(robot_model.nv)
-    a0 = np.zeros(robot_model.nv)
+    v0 = zero(robot_model.nv)
+    a0 = zero(robot_model.nv)
