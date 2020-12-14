@@ -14,6 +14,7 @@ import os
 import pybullet
 from py_pinocchio_bullet.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo12Config
+from robot_properties_solo.utils import find_paths
 
 dt = 1e-3
 
@@ -28,6 +29,7 @@ class Solo12Robot(PinBulletWrapper):
         if orn is None:
             orn = pybullet.getQuaternionFromEuler([0, 0, 0])
 
+        pybullet.setAdditionalSearchPath(Solo12Config.paths["package"])
         self.urdf_path = Solo12Config.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,

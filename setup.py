@@ -13,7 +13,7 @@ def find_resources(package_name):
     """ Find the relative path of files under the resource folder. """
     resources = []
     package_dir = path.join("src", package_name)
-    resources_dir = path.join(package_dir, "resources")
+    resources_dir = path.join(package_dir, package_name)
 
     for (root, _, files) in walk(resources_dir):
         for afile in files:
@@ -39,7 +39,7 @@ resources = find_resources(package_name)
 data_files_to_install = [(path.join("share", package_name), ["package.xml"])]
 data_files_to_install += [
     ("share/ament_index/resource_index/packages", 
-    [path.join("src", package_name, "resources", package_name)])
+    [path.join("src", package_name, package_name, package_name)])
 ]
 
 # Install nodes and demos.
