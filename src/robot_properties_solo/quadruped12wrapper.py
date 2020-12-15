@@ -12,47 +12,32 @@ import numpy as np
 import time
 import os
 import pybullet
-from ament_index_python.packages import get_package_share_directory
 from py_pinocchio_bullet.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo12Config
-
+from robot_properties_solo.utils import find_paths
 
 dt = 1e-3
 
 
 class Solo12Robot(PinBulletWrapper):
-    @staticmethod
-    def initPhysicsClient():
-        physicsClient = pybullet.connect(pybullet.GUI)
-        pybullet.setGravity(0, 0, -9.81)
-        pybullet.setPhysicsEngineParameter(fixedTimeStep=dt, numSubSteps=1)
-        return physicsClient
 
-    def __init__(self, physicsClient=None):
-        if physicsClient is None:
-            self.physicsClient = self.initPhysicsClient()
-
-        # Load the plain.
-        plain_urdf = (
-            get_package_share_directory("robot_properties_solo")
-            + "/urdf/plane_with_restitution.urdf"
-        )
-        self.planeId = pybullet.loadURDF(plain_urdf)
+    def __init__(self, pos=None, orn=None):
 
         # Load the robot
-        robotStartPos = [0.0, 0, 0.40]
-        robotStartOrientation = pybullet.getQuaternionFromEuler([0, 0, 0])
+        if pos is None:
+            pos = [0.0, 0, 0.40]
+        if orn is None:
+            orn = pybullet.getQuaternionFromEuler([0, 0, 0])
 
+        pybullet.setAdditionalSearchPath(Solo12Config.paths["package"])
         self.urdf_path = Solo12Config.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,
-            robotStartPos,
-            robotStartOrientation,
+            pos, orn,
             flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
             useFixedBase=False,
         )
-        pybullet.getBasePositionAndOrientation(self.robotId)
-
+        
         # Create the robot wrapper in pinocchio.
         self.pin_robot = Solo12Config.buildRobotWrapper()
 
@@ -70,10 +55,19 @@ class Solo12Robot(PinBulletWrapper):
             )
 
         self.base_link_name = "base_link"
+        self.end_eff_ids = []
+        self.end_effector_names = []
         controlled_joints = []
+        
         for leg in ["FL", "FR", "HL", "HR"]:
             controlled_joints += [leg + "_HAA", leg + "_HFE", leg + "_KFE"]
+            self.end_eff_ids.append(self.pin_robot.model.getFrameId(leg + "_FOOT"))
+            self.end_effector_names.append(leg + "_FOOT")
+        
         self.joint_names = controlled_joints
+        self.nb_ee = len(self.end_effector_names)
+
+
 
         # Creates the wrapper by calling the super.__init__.
         super(Solo12Robot, self).__init__(

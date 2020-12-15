@@ -12,12 +12,16 @@ All rights reserved.
 
 import time
 import numpy as np
+from bullet_utils.env import BulletEnvWithGround
 from robot_properties_solo.solo12wrapper import Solo12Robot, Solo12Config
 
 if __name__ == "__main__":
 
+    # Create a Pybullet simulation environment
+    env = BulletEnvWithGround()
+
     # Create a robot instance. This initializes the simulator as well.
-    robot = Solo12Robot()
+    robot = env.add_robot(Solo12Robot)
     tau = np.zeros(robot.nb_dof)
 
     # Reset the robot to some initial state.
@@ -25,14 +29,13 @@ if __name__ == "__main__":
     dq0 = np.matrix(Solo12Config.initial_velocity).T
     robot.reset_state(q0, dq0)
 
-    # Run the simulator for 100 steps
-    for i in range(500):
+    # Run the simulator for 2000 steps
+    for i in range(2000):
         # TODO: Implement a controller here.
         robot.send_joint_command(tau)
 
         # Step the simulator.
-        robot.step_simulation()
-        time.sleep(0.001) # You can sleep here if you want to slow down the replay
+        env.step(sleep=True) # You can sleep here if you want to slow down the replay
 
     # Read the final state and forces after the stepping.
     q, dq = robot.get_state()

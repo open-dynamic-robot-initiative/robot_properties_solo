@@ -12,12 +12,16 @@ All rights reserved.
 
 import time
 import numpy as np
+from bullet_utils.env import BulletEnvWithGround
 from robot_properties_solo.solo8wrapper import Solo8Robot, Solo8Config
 
 if __name__ == "__main__":
 
+    # Create a Pybullet simulation environment
+    env = BulletEnvWithGround()
+
     # Create a robot instance. This initializes the simulator as well.
-    robot = Solo8Robot()
+    robot = env.add_robot(Solo8Robot)
     tau = np.zeros(robot.nb_dof)
 
     # Reset the robot to some initial state.
@@ -31,8 +35,7 @@ if __name__ == "__main__":
         robot.send_joint_command(tau)
 
         # Step the simulator.
-        robot.step_simulation()
-        time.sleep(0.001) # You can sleep here if you want to slow down the replay
+        env.step(sleep=True) # You can sleep here if you want to slow down the replay
 
     # Read the final state and forces after the stepping.
     q, dq = robot.get_state()

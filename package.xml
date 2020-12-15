@@ -13,13 +13,14 @@
     
     <author email="mnaveau@tuebingen.mpg.de">Maximilien Naveau</author>
     <maintainer email="mnaveau@tuebingen.mpg.de">Maximilien Naveau</maintainer>
+    <maintainer email="hzhu@nyu.edu">Huaijiang Zhu</maintainer>
     
     <license>BSD-3-clause</license>
 
     <buildtool_depend>ament_python</buildtool_depend>
 
     <depend>pybullet</depend>
-    <depend>pinocchio_bullet</depend>
+    <depend>bullet_utils</depend>
     <depend>pinocchio</depend>
     <depend>xacro</depend>
 
