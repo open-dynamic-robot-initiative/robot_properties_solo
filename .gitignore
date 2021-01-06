@@ -119,3 +119,6 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# generated urdf files
+*.urdf

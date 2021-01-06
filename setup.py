@@ -29,7 +29,7 @@ def find_resources(package_name):
 package_name = "robot_properties_solo"
 
 # Long description from the readme.
-with open("readme.md", "r") as fh:
+with open(path.join(path.dirname(path.realpath(__file__)), "readme.md"), "r") as fh:
     long_description = fh.read()
 
 # Find the resource files.
