@@ -21,7 +21,7 @@ dt = 1e-3
 
 class Solo8Robot(PinBulletWrapper):
 
-    def __init__(self, pos=None, orn=None):
+    def __init__(self, pos=None, orn=None, useFixedBase=False, init_sliders_pose=4*[0,]):
 
         # Load the robot
         if pos is None:
@@ -29,14 +29,15 @@ class Solo8Robot(PinBulletWrapper):
         if orn is None:
             orn = pybullet.getQuaternionFromEuler([0, 0, 0])
 
-        pybullet.setAdditionalSearchPath(Solo8Config.paths["package"])
+        pybullet.setAdditionalSearchPath(Solo8Config.meshes_path)
         self.urdf_path = Solo8Config.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,
             pos, orn,
             flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
-            useFixedBase=False,
+            useFixedBase=useFixedBase,
         )
+        pybullet.getBasePositionAndOrientation(self.robotId)
 
         # Create the robot wrapper in pinocchio.
         self.pin_robot = Solo8Config.buildRobotWrapper()
@@ -53,6 +54,11 @@ class Solo8Robot(PinBulletWrapper):
                 restitution=0.0,
                 lateralFriction=0.5,
             )
+
+        self.slider_a = pybullet.addUserDebugParameter("a", 0, 1, init_sliders_pose[0])
+        self.slider_b = pybullet.addUserDebugParameter("b", 0, 1, init_sliders_pose[1])
+        self.slider_c = pybullet.addUserDebugParameter("c", 0, 1, init_sliders_pose[2])
+        self.slider_d = pybullet.addUserDebugParameter("d", 0, 1, init_sliders_pose[3])
 
         self.base_link_name = "base_link"
         controlled_joints = []
@@ -78,3 +84,13 @@ class Solo8Robot(PinBulletWrapper):
         self.pin_robot.computeJointJacobians(q)
         self.pin_robot.framesForwardKinematics(q)
         self.pin_robot.centroidalMomentum(q, dq)
+
+    def get_slider_position(self, letter):
+        if letter == "a":
+            return pybullet.readUserDebugParameter(self.slider_a)
+        if letter == "b":
+            return pybullet.readUserDebugParameter(self.slider_b)
+        if letter == "c":
+            return pybullet.readUserDebugParameter(self.slider_c)
+        if letter == "d":
+            return pybullet.readUserDebugParameter(self.slider_d)

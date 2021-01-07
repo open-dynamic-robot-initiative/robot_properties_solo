@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""demo_simulate_solo12
+"""demo_simulate_solo8
 
 Simple demo showing how the simulation setup works.
 
@@ -13,7 +13,7 @@ All rights reserved.
 import time
 import numpy as np
 from bullet_utils.env import BulletEnvWithGround
-from robot_properties_solo.solo12wrapper import Solo12Robot, Solo12Config
+from robot_properties_solo.solo8wrapper import Solo8Robot, Solo8Config
 
 if __name__ == "__main__":
 
@@ -21,16 +21,16 @@ if __name__ == "__main__":
     env = BulletEnvWithGround()
 
     # Create a robot instance. This initializes the simulator as well.
-    robot = env.add_robot(Solo12Robot, useFixedBase=True)
+    robot = env.add_robot(Solo8Robot, useFixedBase=True)
     tau = np.zeros(robot.nb_dof)
 
     # Reset the robot to some initial state.
-    q0 = np.matrix(Solo12Config.initial_configuration).T
-    dq0 = np.matrix(Solo12Config.initial_velocity).T
+    q0 = np.matrix(Solo8Config.initial_configuration).T
+    dq0 = np.matrix(Solo8Config.initial_velocity).T
     robot.reset_state(q0, dq0)
 
-    # Run the simulator for 2000 steps
-    for i in range(2000):
+    # Run the simulator for 100 steps
+    for i in range(500):
         # TODO: Implement a controller here.
         robot.send_joint_command(tau)
 
