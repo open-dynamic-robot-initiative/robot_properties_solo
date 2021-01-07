@@ -21,7 +21,7 @@ dt = 1e-3
 
 class Solo12Robot(PinBulletWrapper):
 
-    def __init__(self, pos=None, orn=None):
+    def __init__(self, pos=None, orn=None, useFixedBase=False, init_sliders_pose=4*[0,]):
 
         # Load the robot
         if pos is None:
@@ -29,14 +29,15 @@ class Solo12Robot(PinBulletWrapper):
         if orn is None:
             orn = pybullet.getQuaternionFromEuler([0, 0, 0])
 
-        pybullet.setAdditionalSearchPath(Solo12Config.paths["package"])
+        pybullet.setAdditionalSearchPath(Solo12Config.meshes_path)
         self.urdf_path = Solo12Config.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,
             pos, orn,
             flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
-            useFixedBase=False,
+            useFixedBase=useFixedBase,
         )
+        pybullet.getBasePositionAndOrientation(self.robotId)
         
         # Create the robot wrapper in pinocchio.
         self.pin_robot = Solo12Config.buildRobotWrapper()
@@ -54,6 +55,11 @@ class Solo12Robot(PinBulletWrapper):
                 lateralFriction=0.5,
             )
 
+        self.slider_a = pybullet.addUserDebugParameter("a", 0, 1, init_sliders_pose[0])
+        self.slider_b = pybullet.addUserDebugParameter("b", 0, 1, init_sliders_pose[1])
+        self.slider_c = pybullet.addUserDebugParameter("c", 0, 1, init_sliders_pose[2])
+        self.slider_d = pybullet.addUserDebugParameter("d", 0, 1, init_sliders_pose[3])
+
         self.base_link_name = "base_link"
         self.end_eff_ids = []
         self.end_effector_names = []
@@ -67,7 +73,10 @@ class Solo12Robot(PinBulletWrapper):
         self.joint_names = controlled_joints
         self.nb_ee = len(self.end_effector_names)
 
-
+        self.hl_index = self.pin_robot.model.getFrameId("HL_ANKLE")
+        self.hr_index = self.pin_robot.model.getFrameId("HR_ANKLE")
+        self.fl_index = self.pin_robot.model.getFrameId("FL_ANKLE")
+        self.fr_index = self.pin_robot.model.getFrameId("FR_ANKLE")
 
         # Creates the wrapper by calling the super.__init__.
         super(Solo12Robot, self).__init__(
@@ -88,13 +97,15 @@ class Solo12Robot(PinBulletWrapper):
         self.pin_robot.framesForwardKinematics(q)
         self.pin_robot.centroidalMomentum(q, dq)
 
-    def start_recording(self, file_name):
-        self.file_name = file_name
-        pybullet.startStateLogging(pybullet.STATE_LOGGING_VIDEO_MP4, self.file_name)
-
-    def stop_recording(self):
-        pybullet.stopStateLogging(pybullet.STATE_LOGGING_VIDEO_MP4, self.file_name)
-
+    def get_slider_position(self, letter):
+        if letter == "a":
+            return pybullet.readUserDebugParameter(self.slider_a)
+        if letter == "b":
+            return pybullet.readUserDebugParameter(self.slider_b)
+        if letter == "c":
+            return pybullet.readUserDebugParameter(self.slider_c)
+        if letter == "d":
+            return pybullet.readUserDebugParameter(self.slider_d)
 
 class Quadruped12RobotDeprecationHelper(object):
     """ Class to deprecate the Quadruped12Robot preserving inheritance. """
