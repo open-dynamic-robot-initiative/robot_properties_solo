@@ -3,7 +3,7 @@ Robot Properties Solo
 
 ### What it is
 
-URDF and ROS integration of the Solo BLMC robot.
+Collection of configuration files for the solo robot.
 
 ### Installation
 

@@ -26,13 +26,13 @@ def find_paths(robot_name, robot_family="solo"):
     with importlib_resources.path(__package__, "utils.py") as p:
             package_dir = p.parent.absolute()
     
-    resources_dir = package_dir/("robot_properties_" + robot_family)
-    dgm_yaml_path = resources_dir/"dynamic_graph_manager"/("dgm_parameters_" + robot_name + ".yaml")
-    urdf_path = resources_dir/(robot_name + ".urdf")
-    srdf_path = resources_dir/"srdf"/(robot_family + ".srdf")
-    ctrl_path = resources_dir/"impedance_ctrl.yaml"
+    resources_dir = path.join(package_dir, "robot_properties_" + robot_family)
+    dgm_yaml_path = path.join(resources_dir, "dynamic_graph_manager", "dgm_parameters_" + robot_name + ".yaml")
+    urdf_path = path.join(resources_dir, robot_name + ".urdf")
+    srdf_path = path.join(resources_dir, "srdf", robot_family + ".srdf")
+    ctrl_path = path.join(resources_dir, "impedance_ctrl.yaml")
 
-    if not urdf_path.exists():
+    if not path.exists(urdf_path):
         build_xacro_files(resources_dir)
 
     paths = {"package":str(package_dir),

@@ -35,13 +35,6 @@ with open(path.join(path.dirname(path.realpath(__file__)), "readme.md"), "r") as
 # Find the resource files.
 resources = find_resources(package_name)
 
-# Install the package.xml.
-data_files_to_install = [(path.join("share", package_name), ["package.xml"])]
-data_files_to_install += [
-    ("share/ament_index/resource_index/packages", 
-    [path.join("src", package_name, package_name, package_name)])
-]
-
 # Install nodes and demos.
 scripts_list = []
 for (root, _, files) in walk(path.join("demos")):
@@ -55,20 +48,20 @@ setup(
     package_dir={package_name: path.join("src", package_name)},
     packages=[package_name],
     package_data={package_name: resources},
-    data_files=data_files_to_install,
     scripts=scripts_list,
     install_requires=["setuptools", 
                       "xacro", 
                       "pybullet", 
                       "importlib_resources",
-                      "meshcat"],
+                      "meshcat",
+                      "bullet_utils"],
     zip_safe=True,
     maintainer="mnaveau",
     maintainer_email="mnaveau@tuebingen.mpg.de",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
-    description="Wrapper around the pybullet interface using pinocchio.",
+    url="https://github.com/open-dynamic-robot-initiative/robot_properties_solo/",
+    description="Collection of configuration files for the solo robot.",
     license="BSD-3-clause",
     tests_require=["pytest"],
     entry_points={
