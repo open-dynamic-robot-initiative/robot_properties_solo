@@ -17,6 +17,7 @@ from pinocchio.utils import zero
 from pinocchio.robot_wrapper import RobotWrapper
 from robot_properties_solo.utils import find_paths
 
+
 class SoloAbstract(object):
     """ Abstract class used for all Solo robots. """
 
@@ -175,13 +176,29 @@ class Solo12Config(SoloAbstract):
     motor_gear_ration = 9.0
 
     # pinocchio model.
-    robot_model = se3.buildModelFromUrdf(urdf_path, se3.JointModelFreeFlyer())
-    robot_model.rotorInertia[6:] = motor_inertia
-    robot_model.rotorGearRatio[6:] = motor_gear_ration
+    pin_robot_wrapper = RobotWrapper.BuildFromURDF(
+        urdf_path, meshes_path, se3.JointModelFreeFlyer()
+    )
+    pin_robot_wrapper.model.rotorInertia[6:] = motor_inertia
+    pin_robot_wrapper.model.rotorGearRatio[6:] = motor_gear_ration
+    pin_robot = pin_robot_wrapper
 
+    robot_model = pin_robot_wrapper.model
     mass = np.sum([i.mass for i in robot_model.inertias])
-
     base_name = robot_model.frames[2].name
+
+    # End effectors informations
+    end_eff_ids = []
+    end_effector_names = []
+    for leg in ["FL", "FR", "HL", "HR"]:
+        end_eff_ids.append(robot_model.getFrameId(leg + "_FOOT"))
+        end_effector_names.append(leg + "_FOOT")
+
+    nb_ee = len(end_effector_names)
+    hl_index = robot_model.getFrameId("HL_ANKLE")
+    hr_index = robot_model.getFrameId("HR_ANKLE")
+    fl_index = robot_model.getFrameId("FL_ANKLE")
+    fr_index = robot_model.getFrameId("FR_ANKLE")
 
     # The number of motors, here they are the same as there are only revolute
     # joints.
