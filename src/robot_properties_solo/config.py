@@ -188,9 +188,13 @@ class Solo12Config(SoloAbstract):
     base_name = robot_model.frames[2].name
 
     # End effectors informations
+    shoulder_ids = []
     end_eff_ids = []
+    shoulder_names = []
     end_effector_names = []
     for leg in ["FL", "FR", "HL", "HR"]:
+        shoulder_ids.append(robot_model.getFrameId(leg + "_HAA"))
+        shoulder_names.append(leg + "_HAA")
         end_eff_ids.append(robot_model.getFrameId(leg + "_FOOT"))
         end_effector_names.append(leg + "_FOOT")
 
@@ -248,3 +252,5 @@ class Solo12Config(SoloAbstract):
     q0[:] = initial_configuration
     v0 = zero(robot_model.nv)
     a0 = zero(robot_model.nv)
+
+    base_p_com = [0.0,  0.0,  -0.02]
