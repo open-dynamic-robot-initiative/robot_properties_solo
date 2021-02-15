@@ -4,6 +4,7 @@ import sys
 from os import path, walk
 from setuptools import setup, find_packages
 
+
 def print_error(*args, **kwargs):
     """ Print in stderr. """
     print(*args, file=sys.stderr, **kwargs)
@@ -17,19 +18,24 @@ def find_resources(package_name):
 
     for (root, _, files) in walk(resources_dir):
         for afile in files:
-            if (afile != package_name and 
-                not afile.endswith(".DS_Store") and
-                not afile.endswith(".py")):
+            if (
+                afile != package_name
+                and not afile.endswith(".DS_Store")
+                and not afile.endswith(".py")
+            ):
                 rel_dir = path.relpath(root, package_dir)
                 src = path.join(rel_dir, afile)
                 resources.append(src)
     return resources
 
+
 # Package name.
 package_name = "robot_properties_solo"
 
 # Long description from the readme.
-with open(path.join(path.dirname(path.realpath(__file__)), "readme.md"), "r") as fh:
+with open(
+    path.join(path.dirname(path.realpath(__file__)), "readme.md"), "r"
+) as fh:
     long_description = fh.read()
 
 # Find the resource files.
@@ -49,12 +55,14 @@ setup(
     packages=[package_name],
     package_data={package_name: resources},
     scripts=scripts_list,
-    install_requires=["setuptools", 
-                      "xacro", 
-                      "pybullet", 
-                      "importlib_resources",
-                      "meshcat",
-                      "bullet_utils"],
+    install_requires=[
+        "setuptools",
+        "xacro",
+        "pybullet",
+        "importlib_resources",
+        "meshcat",
+        "bullet_utils",
+    ],
     zip_safe=True,
     maintainer="mnaveau",
     maintainer_email="mnaveau@tuebingen.mpg.de",

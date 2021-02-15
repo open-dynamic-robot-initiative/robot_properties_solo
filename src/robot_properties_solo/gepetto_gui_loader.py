@@ -15,6 +15,7 @@ from py_gepetto_gui_helper.gepetto_gui_scene import GepettoGuiScene
 from py_gepetto_gui_helper.robot_visual import RobotVisual
 from py_gepetto_gui_helper.frame import Frame
 
+
 def create_scene():
     """
     Just create a scene for the solo to be in
@@ -27,8 +28,10 @@ def load_solo_in_gepetto_gui(gepetto_scene, robot_name):
     Load the solo meshes in the scene
     """
     config = SoloConfig()
-    return RobotVisual(gepetto_scene, robot_name, config.urdf_path,
-                       config.meshes_path)
+    return RobotVisual(
+        gepetto_scene, robot_name, config.urdf_path, config.meshes_path
+    )
+
 
 def display_solo_in_gepetto_gui(launch_gepetto_gui_exec=False):
     """
@@ -57,7 +60,6 @@ def display_solo_in_gepetto_gui(launch_gepetto_gui_exec=False):
 
     return gui_scene, solo_visual, world_frame
 
+
 if __name__ == "__main__":
     display_solo_in_gepetto_gui()
-    
-
