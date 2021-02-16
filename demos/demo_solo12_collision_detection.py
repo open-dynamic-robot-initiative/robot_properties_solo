@@ -33,7 +33,7 @@ if __name__ == "__main__":
     robot.collision_model.addAllCollisionPairs()
 
     #  Find the absolute path to the srdf file
-    srdf_path = find_paths("solo12")['srdf']
+    srdf_path = find_paths("solo12")["srdf"]
 
     #  Disable collision pairs specified in the srdf
     pin.removeCollisionPairs(robot.model, robot.collision_model, srdf_path)
@@ -50,7 +50,12 @@ if __name__ == "__main__":
 
     #  Compute all the collisions
     pin.computeCollisions(
-        robot.model, robot.data, robot.collision_model, robot.collision_data, q, False
+        robot.model,
+        robot.data,
+        robot.collision_model,
+        robot.collision_data,
+        q,
+        False,
     )
 
     #  Print the status of collision for all collision pairs
@@ -70,7 +75,12 @@ if __name__ == "__main__":
 
     #  Compute all the collisions
     pin.computeCollisions(
-        robot.model, robot.data, robot.collision_model, robot.collision_data, q, False
+        robot.model,
+        robot.data,
+        robot.collision_model,
+        robot.collision_data,
+        q,
+        False,
     )
 
     #  Print the status of collision for all collision pairs

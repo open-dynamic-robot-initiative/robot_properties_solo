@@ -20,8 +20,16 @@ dt = 1e-3
 
 
 class Solo12Robot(PinBulletWrapper):
-
-    def __init__(self, pos=None, orn=None, useFixedBase=False, init_sliders_pose=4*[0,]):
+    def __init__(
+        self,
+        pos=None,
+        orn=None,
+        useFixedBase=False,
+        init_sliders_pose=4
+        * [
+            0,
+        ],
+    ):
 
         # Load the robot
         if pos is None:
@@ -33,12 +41,13 @@ class Solo12Robot(PinBulletWrapper):
         self.urdf_path = Solo12Config.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,
-            pos, orn,
+            pos,
+            orn,
             flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
             useFixedBase=useFixedBase,
         )
         pybullet.getBasePositionAndOrientation(self.robotId)
-        
+
         # Create the robot wrapper in pinocchio.
         self.pin_robot = Solo12Config.buildRobotWrapper()
 
@@ -55,21 +64,31 @@ class Solo12Robot(PinBulletWrapper):
                 lateralFriction=0.5,
             )
 
-        self.slider_a = pybullet.addUserDebugParameter("a", 0, 1, init_sliders_pose[0])
-        self.slider_b = pybullet.addUserDebugParameter("b", 0, 1, init_sliders_pose[1])
-        self.slider_c = pybullet.addUserDebugParameter("c", 0, 1, init_sliders_pose[2])
-        self.slider_d = pybullet.addUserDebugParameter("d", 0, 1, init_sliders_pose[3])
+        self.slider_a = pybullet.addUserDebugParameter(
+            "a", 0, 1, init_sliders_pose[0]
+        )
+        self.slider_b = pybullet.addUserDebugParameter(
+            "b", 0, 1, init_sliders_pose[1]
+        )
+        self.slider_c = pybullet.addUserDebugParameter(
+            "c", 0, 1, init_sliders_pose[2]
+        )
+        self.slider_d = pybullet.addUserDebugParameter(
+            "d", 0, 1, init_sliders_pose[3]
+        )
 
         self.base_link_name = "base_link"
         self.end_eff_ids = []
         self.end_effector_names = []
         controlled_joints = []
-        
+
         for leg in ["FL", "FR", "HL", "HR"]:
             controlled_joints += [leg + "_HAA", leg + "_HFE", leg + "_KFE"]
-            self.end_eff_ids.append(self.pin_robot.model.getFrameId(leg + "_FOOT"))
+            self.end_eff_ids.append(
+                self.pin_robot.model.getFrameId(leg + "_FOOT")
+            )
             self.end_effector_names.append(leg + "_FOOT")
-        
+
         self.joint_names = controlled_joints
         self.nb_ee = len(self.end_effector_names)
 
@@ -106,6 +125,7 @@ class Solo12Robot(PinBulletWrapper):
             return pybullet.readUserDebugParameter(self.slider_c)
         if letter == "d":
             return pybullet.readUserDebugParameter(self.slider_d)
+
 
 class Quadruped12RobotDeprecationHelper(object):
     """ Class to deprecate the Quadruped12Robot preserving inheritance. """

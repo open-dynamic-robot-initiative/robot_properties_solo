@@ -20,8 +20,16 @@ dt = 1e-3
 
 
 class Solo8Robot(PinBulletWrapper):
-
-    def __init__(self, pos=None, orn=None, useFixedBase=False, init_sliders_pose=4*[0,]):
+    def __init__(
+        self,
+        pos=None,
+        orn=None,
+        useFixedBase=False,
+        init_sliders_pose=4
+        * [
+            0,
+        ],
+    ):
 
         # Load the robot
         if pos is None:
@@ -33,7 +41,8 @@ class Solo8Robot(PinBulletWrapper):
         self.urdf_path = Solo8Config.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,
-            pos, orn,
+            pos,
+            orn,
             flags=pybullet.URDF_USE_INERTIA_FROM_FILE,
             useFixedBase=useFixedBase,
         )
@@ -55,10 +64,18 @@ class Solo8Robot(PinBulletWrapper):
                 lateralFriction=0.5,
             )
 
-        self.slider_a = pybullet.addUserDebugParameter("a", 0, 1, init_sliders_pose[0])
-        self.slider_b = pybullet.addUserDebugParameter("b", 0, 1, init_sliders_pose[1])
-        self.slider_c = pybullet.addUserDebugParameter("c", 0, 1, init_sliders_pose[2])
-        self.slider_d = pybullet.addUserDebugParameter("d", 0, 1, init_sliders_pose[3])
+        self.slider_a = pybullet.addUserDebugParameter(
+            "a", 0, 1, init_sliders_pose[0]
+        )
+        self.slider_b = pybullet.addUserDebugParameter(
+            "b", 0, 1, init_sliders_pose[1]
+        )
+        self.slider_c = pybullet.addUserDebugParameter(
+            "c", 0, 1, init_sliders_pose[2]
+        )
+        self.slider_d = pybullet.addUserDebugParameter(
+            "d", 0, 1, init_sliders_pose[3]
+        )
 
         self.base_link_name = "base_link"
         controlled_joints = []

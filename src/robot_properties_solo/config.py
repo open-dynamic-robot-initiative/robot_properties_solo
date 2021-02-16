@@ -253,4 +253,4 @@ class Solo12Config(SoloAbstract):
     v0 = zero(robot_model.nv)
     a0 = zero(robot_model.nv)
 
-    base_p_com = [0.0,  0.0,  -0.02]
+    base_p_com = [0.0, 0.0, -0.02]
