@@ -35,6 +35,8 @@ Collection of configuration files for the solo robot.
 
 ### Examples
 
+Below are a few examples. You find more in the `demos/` folder.
+
 **Loading Solo12 in PyBullet**
 
 ```
@@ -46,7 +48,7 @@ env = BulletEnvWithGround(p.GUI)
 robot = env.add_robot(Solo12Robot)
 ```
 
-**Run simulation on MPI cluster**
+**Run simulation on Max-Planck Institute cluster**
 
 ```
 conda create -n solo python=3.7
@@ -62,20 +64,8 @@ cd robot_properties_solo
 pip3 install .
 ```
 
-### Authors
-
-- Felix Grimmiger
-- Maximilien Naveau
-- Avadesh Meduri
-- Julian Viereck
-- Huaijiang Zhu
-
-### Copyrights
+### License and Copyrights
 
 Copyright(c) 2018-2021 Max Planck Gesellschaft, New York University
 
-### License
-
 BSD 3-Clause License
-
-
