@@ -17,11 +17,17 @@ from robot_properties_solo.solo12wrapper import Solo12Robot, Solo12Config
 
 if __name__ == "__main__":
 
-    # Create a Pybullet simulation environment
+    # ! Create a Pybullet simulation environment before any robots !
     env = BulletEnvWithGround()
 
-    # Create a robot instance. This initializes the simulator as well.
-    robot = env.add_robot(Solo12Robot, useFixedBase=True)
+    # Create a robot instance. This adds the robot to the simulator as well.
+    robot = Solo12Robot(useFixedBase=True)
+
+    # Add the robot to the env to update the internal structure of the robot
+    # ate every simulation steps.
+    env.add_robot(robot)
+
+    # Some control.
     tau = np.zeros(robot.nb_dof)
 
     # Reset the robot to some initial state.
