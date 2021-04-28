@@ -17,11 +17,11 @@ from robot_properties_solo.solo8wrapper import Solo8Robot, Solo8Config
 
 if __name__ == "__main__":
 
-# ! Create a Pybullet simulation environment before any robots !
+    # ! Create a Pybullet simulation environment before any robots !
     env = BulletEnvWithGround()
 
     # Create a robot instance. This adds the robot to the simulator as well.
-    robot = Solo8Robot(useFixedBase=False)
+    robot = Solo8Robot()
 
     # Add the robot to the env to update the internal structure of the robot
     # ate every simulation steps.
