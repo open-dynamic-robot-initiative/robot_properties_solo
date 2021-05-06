@@ -1,0 +1,71 @@
+#
+# @file dgm_parameters_solo12.yaml
+# @author Maximilien Naveau (maximilien.naveau@gmail.com)
+# @license License BSD-3-Clause
+# @copyright Copyright (c) 2019, New York University and Max Planck Gesellschaft.
+# @date 2019-05-22
+#
+# @brief Define the interface between the control and the hardware
+#
+
+is_real_robot: true
+device:
+  name: "solo12"
+  sensors:
+    # joints data
+    joint_positions:
+      size: 12
+    joint_velocities:
+      size: 12
+    joint_torques:
+      size: 12
+    joint_target_torques:
+      size: 12
+    joint_encoder_index:
+      size: 12
+    # additional data
+    slider_positions:
+      size: 4
+    imu_accelerometer:
+      size: 3
+    imu_gyroscope:
+      size: 3
+    imu_attitude:
+      size: 3
+    imu_linear_acceleration:
+      size: 3
+    imu_attitude_quaternion:
+      size: 4
+    # robot status
+    motor_enabled:
+      size: 12
+    motor_ready:
+      size: 12
+    motor_board_enabled:
+      size: 6
+    motor_board_errors:
+      size: 6
+  controls:
+    ctrl_joint_torques:
+      size: 12
+hardware_communication:
+  max_missed_control: 10
+  control_period: 1000000 # in nano second this means 1ms <=> 1kz
+  maximum_time_for_user_cmd: 100000
+  # Angle between the next index and the home position(joint_positions=12*[0.,])
+  # NOTE: FR_HAA and HR_HAA are rotating in the other direction.
+  calibration:
+    # 'FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
+    # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
+    index_to_zero_angle: [
+      -0.211, -0.358150, -0.168154,
+       0.363, -0.300973, -0.206689,
+      -0.243272, -0.576764, -0.253285,
+      -0.031121, -0.277637, -0.148633
+    ]
+  network_id: "ens4"
+  serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
+
+motor_I: 0.045     # The inertia of a single blmc_motor
+motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
+motor_gear_ratio: 9 # On the quadruped the gear ration is 1:9
