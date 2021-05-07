@@ -12,7 +12,7 @@ import numpy as np
 import time
 import os
 import pybullet
-from py_pinocchio_bullet.wrapper import PinBulletWrapper
+from bullet_utils.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo12Config
 from robot_properties_solo.utils import find_paths
 
@@ -125,29 +125,3 @@ class Solo12Robot(PinBulletWrapper):
             return pybullet.readUserDebugParameter(self.slider_c)
         if letter == "d":
             return pybullet.readUserDebugParameter(self.slider_d)
-
-
-class Quadruped12RobotDeprecationHelper(object):
-    """ Class to deprecate the Quadruped12Robot preserving inheritance. """
-
-    def __init__(self, new_target):
-        self.new_target = new_target
-
-    def _warn(self):
-        from warnings import warn
-
-        warn(
-            "Quadruped12Robot class name is deprecated, please use:\n"
-            "    from robot_properties_solo.solo12wrapper import Solo12Robot"
-        )
-
-    def __call__(self, *args, **kwargs):
-        self._warn()
-        return self.new_target(*args, **kwargs)
-
-    def __getattr__(self, attr):
-        self._warn()
-        return getattr(self.new_target, attr)
-
-
-Quadruped12Robot = Quadruped12RobotDeprecationHelper(Solo12Robot)
