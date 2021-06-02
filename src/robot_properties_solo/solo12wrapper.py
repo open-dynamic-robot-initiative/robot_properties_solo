@@ -8,13 +8,9 @@ Copyright note valid unless otherwise stated in individual files.
 All rights reserved.
 """
 
-import numpy as np
-import time
-import os
 import pybullet
 from bullet_utils.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo12Config
-from robot_properties_solo.utils import find_paths
 
 dt = 1e-3
 
