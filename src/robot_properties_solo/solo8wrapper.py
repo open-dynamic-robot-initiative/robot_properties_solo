@@ -11,7 +11,7 @@ All rights reserved.
 import numpy as np
 import time
 import os
-import pybullets
+import pybullet
 from bullet_utils.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo8Config
 from robot_properties_solo.utils import find_paths
