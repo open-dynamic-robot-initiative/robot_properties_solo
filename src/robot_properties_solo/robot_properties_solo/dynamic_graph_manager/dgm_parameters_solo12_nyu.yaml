@@ -59,7 +59,7 @@ hardware_communication:
     # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
     index_to_zero_angle: [
        0.179, 0.497, 0.360,
-      -0.224, 0.222, 0.465,
+      -0.402, 0.222, 0.602,
        0.474, 0.536, 0.424,
       -0.252, 0.428, 0.233
     ]
