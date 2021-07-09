@@ -113,11 +113,15 @@ class Solo12Robot(PinBulletWrapper):
         self.pin_robot.centroidalMomentum(q, dq)
 
     def get_slider_position(self, letter):
-        if letter == "a":
-            return pybullet.readUserDebugParameter(self.slider_a)
-        if letter == "b":
-            return pybullet.readUserDebugParameter(self.slider_b)
-        if letter == "c":
-            return pybullet.readUserDebugParameter(self.slider_c)
-        if letter == "d":
-            return pybullet.readUserDebugParameter(self.slider_d)
+        try:
+            if letter == "a":
+                return pybullet.readUserDebugParameter(self.slider_a)
+            if letter == "b":
+                return pybullet.readUserDebugParameter(self.slider_b)
+            if letter == "c":
+                return pybullet.readUserDebugParameter(self.slider_c)
+            if letter == "d":
+                return pybullet.readUserDebugParameter(self.slider_d)
+        except:
+            # In case of not using a GUI.
+            return 0.
