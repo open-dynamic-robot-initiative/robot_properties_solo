@@ -70,6 +70,10 @@ hardware_communication:
   network_id: "ens4"
   serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
 
+  ros_node_name: "solo12"
+  shared_memory_name: "shm_solo12"
+  cpu_id: 0
+
 motor_I: 0.045     # The inertia of a single blmc_motor
 motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
 motor_gear_ratio: 9 # On the quadruped the gear ration is 1:9
