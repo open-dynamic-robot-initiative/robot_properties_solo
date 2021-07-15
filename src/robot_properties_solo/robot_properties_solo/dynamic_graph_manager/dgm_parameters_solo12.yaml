@@ -70,7 +70,7 @@ hardware_communication:
                           0.241, 0.588, 0.236,
                           0.004, 0.288, 0.143]
   ros_node_name: "solo12"
-  shared_memory_name: "shm_solo12"
+  shared_memory_name: "DGM_ShM"
   cpu_id: 0
 
   network_id: "ens4"

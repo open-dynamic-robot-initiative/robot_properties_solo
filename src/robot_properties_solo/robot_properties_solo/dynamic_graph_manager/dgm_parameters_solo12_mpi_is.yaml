@@ -71,7 +71,7 @@ hardware_communication:
   serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
 
   ros_node_name: "solo12"
-  shared_memory_name: "shm_solo12"
+  shared_memory_name: "DGM_ShM"
   cpu_id: 0
 
 motor_I: 0.045     # The inertia of a single blmc_motor
