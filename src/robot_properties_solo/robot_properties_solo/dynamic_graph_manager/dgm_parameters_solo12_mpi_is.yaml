@@ -8,7 +8,6 @@
 # @brief Define the interface between the control and the hardware
 #
 
-is_real_robot: true
 device:
   name: "solo12"
   sensors:
@@ -48,6 +47,8 @@ device:
   controls:
     ctrl_joint_torques:
       size: 12
+    ctrl_heart_beat:
+      size: 1
 hardware_communication:
   max_missed_control: 10
   control_period: 1000000 # in nano second this means 1ms <=> 1kz
@@ -71,9 +72,6 @@ hardware_communication:
   serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
 
   ros_node_name: "solo12"
-  shared_memory_name: "shm_solo12"
+  shared_memory_name: "DGM_ShM"
   cpu_id: 0
 
-motor_I: 0.045     # The inertia of a single blmc_motor
-motor_KT: 0.025    # The Kt constant of the motor [Nm/A]: tau = I * Kt
-motor_gear_ratio: 9 # On the quadruped the gear ration is 1:9
