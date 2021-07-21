@@ -1,0 +1,40 @@
+robot:
+    interface: enp5s0f1
+    joint_modules:
+        motor_numbers: [0, 3, 2, 1, 5, 4, 6, 9, 8, 7, 11, 10]
+        motor_constants: 0.025
+        gear_ratios: 9.
+        max_currents: 8.
+        reverse_polarities: [
+            false, true, true, true, false, false,
+            false, true, true, true, false, false
+        ]
+        lower_joint_limits: [
+            -0.9, -1.45, -2.8, -0.9, -1.45, -2.8,
+            -0.9, -1.45, -2.8, -0.9, -1.45, -2.8
+        ]
+        upper_joint_limits: [
+            0.9,  1.45,  2.8,  0.9,  1.45,  2.8,
+            0.9,  1.45,  2.8,  0.9,  1.45,  2.8
+        ]
+        max_joint_velocities: 80.
+        safety_damping: 0.2
+    imu:
+        rotate_vector: [1, 2, 3]
+        orientation_vector: [1, 2, 3, 4]
+joint_calibrator:
+    # Can be either POS, NEG, ALT or AUTO
+    search_methods: [
+      POS, POS, POS, NEG, POS, POS,
+      POS, POS, POS, NEG, POS, POS
+    ]
+    position_offsets: [
+       0.179, 0.497, 0.360,
+      -0.594, 0.219, 0.602,
+       0.543, 0.539, 0.436,
+      -0.241, 0.440, 0.210
+    ]
+    Kp: 5.
+    Kd: 0.05
+    T: 1.
+    dt: 0.001
