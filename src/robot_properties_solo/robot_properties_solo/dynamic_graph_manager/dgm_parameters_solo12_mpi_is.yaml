@@ -29,11 +29,9 @@ device:
       size: 3
     imu_gyroscope:
       size: 3
-    imu_attitude:
-      size: 3
     imu_linear_acceleration:
       size: 3
-    imu_attitude_quaternion:
+    imu_attitude:
       size: 4
     # robot status
     motor_enabled:
