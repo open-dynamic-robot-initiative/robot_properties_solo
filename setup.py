@@ -177,7 +177,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/open-dynamic-robot-initiative/robot_properties_solo",
-    description="Wrapper around the pybullet interface using pinocchio.",
+    description="Collection of configuration files for the solo robots.",
     license="BSD-3-clause",
     tests_require=["pytest"],
     entry_points={
