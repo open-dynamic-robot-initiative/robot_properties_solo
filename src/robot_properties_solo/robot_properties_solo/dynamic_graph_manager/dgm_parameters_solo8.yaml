@@ -53,3 +53,4 @@ hardware_communication:
   ros_node_name: "solo8"
   shared_memory_name: "DGM_ShM"
   cpu_id: 0
+  
