@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+    
+    <name>robot_properties_solo</name>
+    
+    <version>1.0.0</version>
+    
+    <description>
+        URDFs of the Solo robot and configurations files of different
+        application like controllers, planners and so forth.
+    </description>
+
+    <maintainer email="mnaveau@tuebingen.mpg.de">Maximilien Naveau</maintainer>
+    
+    <license>BSD-3-clause</license>
+
+    <buildtool_depend>ament_python</buildtool_depend>
+
+    <depend>pybullet</depend>
+    <depend>bullet_utils</depend>
+    <depend>pinocchio</depend>
+    <depend>xacro</depend>
+
+    <test_depend>ament_copyright</test_depend>
+    <test_depend>ament_flake8</test_depend>
+    <test_depend>ament_pep257</test_depend>
+    <test_depend>python3-pytest</test_depend>
+
+    <export>
+        <build_type>ament_python</build_type>
+    </export>
+</package>

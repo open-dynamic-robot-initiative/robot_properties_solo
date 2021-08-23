@@ -33,7 +33,7 @@ class Solo12Robot(PinBulletWrapper):
         if orn is None:
             orn = pybullet.getQuaternionFromEuler([0, 0, 0])
 
-        pybullet.setAdditionalSearchPath(Solo12Config.meshes_path)
+        pybullet.setAdditionalSearchPath(Solo12Config.resources.package_path)
         self.urdf_path = Solo12Config.urdf_path
         self.robotId = pybullet.loadURDF(
             self.urdf_path,
