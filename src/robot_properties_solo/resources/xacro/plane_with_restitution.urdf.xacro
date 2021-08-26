@@ -13,7 +13,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-      <mesh filename="package://robot_properties_solo/meshes/plane.obj" scale="1 1 1"/>
+      <mesh filename="package://robot_properties_solo/resources/meshes/plane.obj" scale="1 1 1"/>
       </geometry>
        <material name="white">
         <color rgba="1 1 1 1"/>
