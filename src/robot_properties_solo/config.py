@@ -49,6 +49,9 @@ class SoloAbstract(object):
     base_link_name = "base_link"
     end_effector_names = ["HL_ANKLE", "HR_ANKLE", "FL_ANKLE", "FR_ANKLE"]
 
+    rot_base_to_imu = np.identity(3)
+    r_base_to_imu = np.zeros(3)
+
     @classmethod
     def buildRobotWrapper(cls):
         # Rebuild the robot wrapper instead of using the existing model to
@@ -255,3 +258,6 @@ class Solo12Config(SoloAbstract):
     a0 = zero(robot_model.nv)
 
     base_p_com = [0.0, 0.0, -0.02]
+
+    rot_base_to_imu = np.identity(3)
+    r_base_to_imu = np.array([0.10407, -0.00635, 0.01540])
