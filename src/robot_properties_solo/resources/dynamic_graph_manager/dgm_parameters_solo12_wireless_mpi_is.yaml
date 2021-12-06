@@ -56,11 +56,11 @@ hardware_communication:
   calibration:
     # 'FL_HAA', 'FL_HFE', 'FL_KFE', 'FR_HAA', 'FR_HFE', 'FR_KFE',
     # 'HL_HAA', 'HL_HFE', 'HL_KFE', 'HR_HAA', 'HR_HFE', 'HR_KFE'
-    index_to_zero_angle: [0.181, 0.640, 0.370,
-                         -0.354, 0.392, 0.507,
-                          0.210, 0.733, 0.156,
-                          0.014, 0.212, 0.178]
-  network_id: "ens4"
+    index_to_zero_angle: [0.627, 0.576, 0.658,
+                          0.057, 0.538, 0.569,
+                          0.543, 0.058, 0.219,
+                          -0.145, 0.357, 0.655, ]
+  network_id: "enp0s31f6"
   serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
 
   ros_node_name: "solo12"
