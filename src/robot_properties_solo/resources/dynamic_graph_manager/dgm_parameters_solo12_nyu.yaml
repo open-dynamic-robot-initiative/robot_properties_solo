@@ -45,6 +45,14 @@ device:
   controls:
     ctrl_joint_torques:
       size: 12
+    ctrl_joint_positions:
+      size: 12
+    ctrl_joint_velocities:
+      size: 12
+    ctrl_joint_position_gains:
+      size: 12
+    ctrl_joint_velocity_gains:
+      size: 12
     ctrl_heart_beat:
       size: 1
 hardware_communication:
