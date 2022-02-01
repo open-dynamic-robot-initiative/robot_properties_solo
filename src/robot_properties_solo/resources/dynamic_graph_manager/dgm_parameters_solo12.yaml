@@ -45,6 +45,14 @@ device:
       size: 6
     motor_board_errors:
       size: 6
+    num_sent_command_packets:
+      size: 1
+    num_lost_command_packets:
+      size: 1
+    num_sent_sensor_packets:
+      size: 1
+    num_lost_sensor_packets:
+      size: 1
   controls:
     ctrl_joint_torques:
       size: 12
