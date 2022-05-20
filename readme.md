@@ -19,19 +19,46 @@ Collection of configuration files for the solo robot.
 
 2. Install bullet_utils:
 
+  If you use ssh to clone the repository.
+
   ```
   git clone git@github.com:machines-in-motion/bullet_utils.git
   cd bullet_utils
   pip3 install .
   ```
 
+  Or if you use https to clone the repository.
+
+  ```
+  git clone https://github.com/machines-in-motion/bullet_utils.git
+  cd bullet_utils
+  pip3 install .
+  ```
+
 3. Install robot_properties_solo:
+
+  If you use ssh to clone the repository.
 
   ```
   git clone git@github.com:open-dynamic-robot-initiative/robot_properties_solo.git
   cd robot_properties_solo
   pip3 install .
   ```
+
+  Or if you use https to clone the repository.
+
+  ```
+  git clone https://github.com/open-dynamic-robot-initiative/robot_properties_solo.git
+  cd bullet_utils
+  pip3 install .
+  ```
+
+4. (Optional) In order to run the demo python files in the `demos/` folder that start with `demo_display_solo*`, please install [gepetto-viewer](https://github.com/Gepetto/gepetto-viewer)
+  It is easier to install it using conda.
+  ```
+  conda install gepetto-viewer gepetto-viewer-corba -c conda-forge
+  ```
+
 
 ### Examples
 
