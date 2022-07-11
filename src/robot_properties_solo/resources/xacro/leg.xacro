@@ -4,18 +4,19 @@
 
   <!-- See TODO: add the wiki link here -->
   <!-- These are absoulte distance value, the sign are decided below -->
-  <xacro:property name="base_2_HAA_x" value="${194.60 * 0.001}" />
+  <xacro:property name="base_2_HAA_x" value="${214.10 * 0.001}" />
   <xacro:property name="base_2_HAA_y" value="${87.50 * 0.001}" />
 
   <xacro:property name="HAA_2_HFE_y" value="${14.0 * 0.001}" />
+  <xacro:property name="HAA_2_HFE_x" value="${19.5 * 0.001}" />
 
-  <xacro:property name="base_2_HFE_x" value="${190.00 * 0.001}" />
-  <xacro:property name="base_2_HFE_y" value="${104.60 * 0.001}" />
+  <xacro:property name="base_2_HFE_x" value="${194.60 * 0.001}" />
+  <xacro:property name="base_2_HFE_y" value="${101.50 * 0.001}" />
 
   <xacro:property name="HFE_2_KFE_y" value="${37.45 * 0.001}" />
   <xacro:property name="HFE_2_KFE_z" value="${160.00 * 0.001}" />
 
-  <xacro:property name="KFE_2_FOOT_y" value="${8.0 * 0.001}" />
+  <xacro:property name="KFE_2_FOOT_y" value="${9.0 * 0.001}" />
   <xacro:property name="KFE_2_FOOT_z" value="${160.00 * 0.001}" />
 
   <!-- Macro defining solo leg. -->
@@ -121,37 +122,37 @@
             </material>
         </collision>
         <inertial>
-          <mass value="0.14853845"/>
+          <mass value="0.14196048"/>
           <xacro:if value="${is_front}">
             <xacro:unless value="${is_right}">
               <!-- HAA body inertia -->
-              <origin xyz="-0.07870700 0.01 0." rpy="0 0 0" />
-              <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
-                                        iyy="0.00041193" iyz="0.0"
-                                                        izz="0.00041107"/>
+              <origin xyz="-0.09407251 -0.00438935 0.00001384" rpy="0 0 0" />
+              <inertia ixx="0.00002802" ixy="0.00003687" ixz="-0.00000009"
+                                        iyy="0.00038264" iyz="0.00000000"
+                                                         izz="0.00038050"/>
             </xacro:unless>
             <xacro:if value="${is_right}">
               <!-- HAA body inertia -->
-              <origin xyz="-0.07870700 -0.01 0." rpy="0 0 0" />
-              <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
-                                        iyy="0.00041193" iyz="0.0"
-                                                        izz="0.00041107"/>
+              <origin xyz="-0.09407251 0.00438935 -0.00001384" rpy="0 0 0" />
+              <inertia ixx="0.00002802" ixy="-0.00003687" ixz="0.00000009"
+                                        iyy="0.00038264"  iyz="0.00000000"
+                                                          izz="0.00038050"/>
             </xacro:if>
           </xacro:if>
           <xacro:unless value="${is_front}">
             <xacro:unless value="${is_right}">
               <!-- HAA body inertia -->
-              <origin xyz="0.07870700 0.01 0." rpy="0 0 0" />
-              <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0"
-                                        iyy="0.00041193" iyz="0.0"
-                                                        izz="0.00041107"/>
+              <origin xyz="0.09407251 -0.00438935 -0.00001384" rpy="0 0 0" />
+              <inertia ixx="0.00002802" ixy="-0.00003687" ixz="-0.00000009"
+                                        iyy="0.00038264"  iyz="0.00000000"
+                                                          izz="0.00038050"/>
             </xacro:unless>
             <xacro:if value="${is_right}">
               <!-- HAA body inertia -->
-              <origin xyz="0.07870700 -0.01 0." rpy="0 0 0" />
-              <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0"
-                                        iyy="0.00041193" iyz="0.0"
-                                                        izz="0.00041107"/>
+              <origin xyz="0.09407251 0.00438935 0.00001384" rpy="0 0 0" />
+              <inertia ixx="0.00002802" ixy="0.00003687" ixz="0.00000009"
+                                        iyy="0.00038264" iyz="0.00000000"
+                                                         izz="0.00038050"/>
             </xacro:if>
           </xacro:unless>
         </inertial>
@@ -163,11 +164,21 @@
         <!-- joints rotates around the y-axis -->
         <axis xyz="0 1 0"/>
         <!-- placement of the joint -->
-        <xacro:if value="${is_right}">
-          <origin xyz="0 ${-HAA_2_HFE_y} 0" rpy="0 0 0" />
+        <xacro:if value="${is_front}">
+          <xacro:unless value="${is_right}">
+            <origin xyz="${-HAA_2_HFE_x} ${HAA_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:unless>
+          <xacro:if value="${is_right}">
+            <origin xyz="${-HAA_2_HFE_x} ${-HAA_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:if>
         </xacro:if>
-        <xacro:unless value="${is_right}">
-          <origin xyz="0 ${HAA_2_HFE_y} 0" rpy="0 0 0" />
+        <xacro:unless value="${is_front}">
+          <xacro:unless value="${is_right}">
+            <origin xyz="${HAA_2_HFE_x} ${HAA_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:unless>
+          <xacro:if value="${is_right}">
+            <origin xyz="${HAA_2_HFE_x} ${-HAA_2_HFE_y} 0" rpy="0 0 0" />
+          </xacro:if>
         </xacro:unless>
         <!-- pybullet simulation parameters -->
         <dynamics damping="0.0" friction="0.0"/>
@@ -208,21 +219,21 @@
       <xacro:unless value="${is_right}">
         <!-- Left upper leg inertia -->
         <inertial>
-        <origin xyz="0.00001377 0.01935853 -0.07870700" rpy="0 0 0" />
-        <mass value="0.14853845"/>
-        <inertia ixx="0.00041107" ixy="0.0"         ixz="0.0"
-                                   iyy="0.00041193" iyz="0.00004671"
-                                                    izz="0.00003024"/>
+        <mass value="0.14737324"/>
+        <origin xyz="0.00001530 0.01767640 -0.07838230" rpy="0 0 0" />
+        <inertia ixx="0.00041540"  ixy="0.00000000" ixz="0.00000010"
+                                   iyy="0.00041637" iyz="-0.00004589"
+                                                    izz="0.00002982"/>
         </inertial>
       </xacro:unless>
       <xacro:if value="${is_right}">
         <!-- Right upper leg inertia -->
         <inertial>
-        <origin xyz="-0.00001377 -0.01935853 -0.07870700" rpy="0 0 0" />
-        <mass value="0.14853845"/>
-        <inertia ixx="0.00041107" ixy="0.0"         ixz="0.0"
-                                   iyy="0.00041193" iyz="-0.00004671"
-                                                    izz="0.00003024"/>
+        <mass value="0.14737324"/>
+        <origin xyz="-0.00001530 -0.01767640 -0.07838230" rpy="0 0 0" />
+        <inertia ixx="0.00041540"  ixy="0.00000000" ixz="-0.00000010"
+                                   iyy="0.00041637" iyz="0.00004589"
+                                                    izz="0.00002982"/>
         </inertial>
       </xacro:if>
       <!-- UPPER LEG LINK VISUAL -->
@@ -295,21 +306,21 @@
       <xacro:unless value="${is_right}">
         <!-- Left lower leg inertia -->
         <inertial>
-        <origin xyz="0.0 0.00787644 -0.08928215" rpy="0 0 0" />
-        <mass value="0.03070001"/>
-        <inertia ixx="0.00012024" ixy="0.0"         ixz="0.0"
-                                   iyy="0.00012029" iyz="0.00000305"
-                                                    izz="0.00000216"/>
+        <mass value="0.02318294"/>
+        <origin xyz="0.00000000 0.00776716 -0.07003876" rpy="0 0 0" />
+        <inertia ixx="0.00008508" ixy="0.00000000"  ixz="0.00000000"
+                                  iyy="0.00008580"  iyz="-0.00000200"
+                                                    izz="0.00000139"/>
         </inertial>
       </xacro:unless>
       <xacro:if value="${is_right}">
         <!-- Right lower leg inertia -->
         <inertial>
-        <origin xyz="0.0 0.00787644 -0.08928215" rpy="0 0 0" />
-        <mass value="0.03070001"/>
-        <inertia ixx="0.00012024" ixy="0.0"         ixz="0.0"
-                                   iyy="0.00012029" iyz="-0.00000305"
-                                                    izz="0.00000216"/>
+        <mass value="0.02318294"/>
+        <origin xyz="0.00000000 -0.00776716 -0.07003876" rpy="0 0 0" />
+        <inertia ixx="0.00008508" ixy="0.00000000"  ixz="0.00000000"
+                                  iyy="0.00008580"  iyz="0.00000200"
+                                                    izz="0.00000139"/>
         </inertial>
       </xacro:if>
       <!-- LOWER LEG LINK VISUAL -->
@@ -349,7 +360,7 @@
       </contact>
     </link> <!-- END LOWER LEG LINK -->
 
-    <!-- KFE: Joint between the upper leg and the lower leg -->
+    <!-- KFE: Joint between the lower leg and the ankle -->
     <joint name="${prefix}_ANKLE" type="fixed">
       <parent link="${prefix}_LOWER_LEG"/>
       <child link="${prefix}_FOOT"/>
@@ -370,11 +381,11 @@
       <!-- FOOT INERTIAL -->
       <!-- This link is symmetrical left or right -->
       <inertial>
-        <origin xyz="0 0 0.00035767" rpy="0 0 0" />
-        <mass value="0.00693606"/>
-        <inertia ixx="0.00000057" ixy="0.0"         ixz="0.0"
-                                   iyy="0.00000084" iyz="0.0"
-                                                    izz="0.00000053"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0"
+                           iyy="0.0" iyz="0.0"
+                                     izz="0.0"/>
      </inertial>
       <!-- FOOT VISUAL -->
       <visual>
