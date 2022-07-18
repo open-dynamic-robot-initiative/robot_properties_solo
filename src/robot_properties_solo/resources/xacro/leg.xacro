@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" name="solo">
 
-  <!-- See TODO: add the wiki link here -->
+  <!-- See https://github.com/open-dynamic-robot-initiative/open_robot_actuator_hardware/blob/master/mechanics/quadruped_robot_12dof_v1/README.md#quadruped-robot-12dof-v1 -->
   <!-- These are absoulte distance value, the sign are decided below -->
   <xacro:property name="base_2_HAA_x" value="${214.10 * 0.001}" />
   <xacro:property name="base_2_HAA_y" value="${87.50 * 0.001}" />
@@ -360,7 +360,9 @@
       </contact>
     </link> <!-- END LOWER LEG LINK -->
 
-    <!-- Joint between the lower leg and the ankle -->
+    <!-- Joint between the lower leg and the ankle,
+         this is only a dummy joint such that we
+         can assign coordinate frames to foot-->
     <joint name="${prefix}_ANKLE" type="fixed">
       <parent link="${prefix}_LOWER_LEG"/>
       <child link="${prefix}_FOOT"/>
@@ -371,7 +373,7 @@
       <xacro:if value="${is_right}">
         <origin xyz="0 ${-KFE_2_FOOT_y} ${-KFE_2_FOOT_z}" rpy="0 0 0" />
       </xacro:if>
-      <!-- Limits (usefull?) -->
+      <!-- Limits -->
       <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
       <!-- pybullet simulation parameters -->
       <dynamics damping="0.0" friction="0.0"/>
@@ -379,15 +381,14 @@
 
     <link name="${prefix}_FOOT">
       <!-- FOOT INERTIAL -->
-      <!-- This link is symmetrical left or right -->
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <mass value="0.0"/>
         <inertia ixx="0.0" ixy="0.0" ixz="0.0"
                            iyy="0.0" iyz="0.0"
                                      izz="0.0"/>
-     </inertial>
-    </link> <!-- END LOWER LEG LINK -->
+      </inertial>
+    </link> <!-- END FOOT LINK -->
 
   </xacro:macro>
 </robot>
