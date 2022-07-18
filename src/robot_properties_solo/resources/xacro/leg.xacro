@@ -241,10 +241,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_upper_leg_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_upper_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_upper_leg_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -256,10 +256,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_upper_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_upper_leg_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_upper_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_upper_leg_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -328,10 +328,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_lower_leg_v2_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_lower_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_lower_leg_v2_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -343,10 +343,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <xacro:unless value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_lower_leg_left_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_lower_leg_v2_left_side.${mesh_ext}"/>
           </xacro:unless>
           <xacro:if value="${is_right}">
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_lower_leg_right_side.${mesh_ext}"/>
+            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/without_foot/solo_lower_leg_v2_right_side.${mesh_ext}"/>
           </xacro:if>
         </geometry>
         <material name="${color_name}">
@@ -360,7 +360,7 @@
       </contact>
     </link> <!-- END LOWER LEG LINK -->
 
-    <!-- KFE: Joint between the lower leg and the ankle -->
+    <!-- Joint between the lower leg and the ankle -->
     <joint name="${prefix}_ANKLE" type="fixed">
       <parent link="${prefix}_LOWER_LEG"/>
       <child link="${prefix}_FOOT"/>
@@ -387,31 +387,6 @@
                            iyy="0.0" iyz="0.0"
                                      izz="0.0"/>
      </inertial>
-      <!-- FOOT VISUAL -->
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
-        </geometry>
-        <material name="${color_name}">
-            <color rgba="${color} ${opacity}"/>
-        </material>
-      </visual>
-      <!-- FOOT COLLISION -->
-      <collision>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <mesh filename="package://robot_properties_solo/resources/meshes/${mesh_ext}/with_foot/solo_foot.${mesh_ext}"/>
-        </geometry>
-        <material name="${color_name}">
-            <color rgba="${color} ${opacity}"/>
-        </material>
-      </collision>
-      <!-- Bullet specific paramters -->
-      <contact>
-        <lateral_friction value="1.0"/>
-        <restitution value="0.5"/>
-      </contact>
     </link> <!-- END LOWER LEG LINK -->
 
   </xacro:macro>
