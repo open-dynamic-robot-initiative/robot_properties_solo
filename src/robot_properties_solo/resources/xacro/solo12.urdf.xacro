@@ -10,16 +10,16 @@
   <xacro:property name="opacity" value="1.0" />
   <xacro:property name="mesh_ext" value="stl" />
 
-  <!-- This file is based on: https://atlas.is.localnet/confluence/display/AMDW/Quadruped+URDF+Files -->
+  <!-- This file is based on: https://github.com/open-dynamic-robot-initiative/open_robot_actuator_hardware/blob/master/mechanics/quadruped_robot_12dof_v1/README.md#quadruped-robot-12dof-v1 -->
   <link name="base_link">
     <!-- BASE LINK INERTIAL -->
     <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="1.16115091"/>
+        <origin xyz="-0.00082966 0.00000105 -0.00060210" rpy="0 0 0" />
+        <mass value="1.25123725"/>
         <!-- The base is extremely symmetrical. -->
-        <inertia ixx="0.00578574" ixy="0.0" ixz="0.0"
-                                  iyy="0.01938108" iyz="0.0"
-                                                   izz="0.02476124"
+        <inertia ixx="0.00266220" ixy="-0.00003684" ixz="-0.00001716"
+                                  iyy="0.01388510"  iyz="-0.00000009"
+                                                    izz="0.01605370"
         />
     </inertial>
     <!-- BASE LINK VISUAL -->
