@@ -7,8 +7,9 @@ Copyright (C) 2018-2019, New York University , Max Planck Gesellschaft
 Copyright note valid unless otherwise stated in individual files.
 All rights reserved.
 """
-
+import numpy as np
 import pybullet
+
 from bullet_utils.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo12Config
 
@@ -122,6 +123,12 @@ class Solo12Robot(PinBulletWrapper):
                 return pybullet.readUserDebugParameter(self.slider_c)
             if letter == "d":
                 return pybullet.readUserDebugParameter(self.slider_d)
-        except:
+        except Exception:
             # In case of not using a GUI.
             return 0.
+
+    def reset_to_initial_state(self) -> None:
+        """Reset robot state to the initial configuration (based on Solo12Config)."""
+        q0 = np.matrix(Solo12Config.initial_configuration).T
+        dq0 = np.matrix(Solo12Config.initial_velocity).T
+        self.reset_state(q0, dq0)
