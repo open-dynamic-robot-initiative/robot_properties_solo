@@ -88,4 +88,4 @@ hardware_communication:
   cpu_id: 0
 
   network_id: "ens4"
-  serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
+  serial_port: "auto"
