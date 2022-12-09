@@ -79,7 +79,7 @@ hardware_communication:
        -0.046, 0.257, 0.438
     ]
   network_id: "enp5s0f1"
-  serial_port: "/dev/this_doesnt_matter_see_serial_reader.cpp"
+  serial_port: "auto"
 
   ros_node_name: "solo12"
   shared_memory_name: "DGM_ShM"
