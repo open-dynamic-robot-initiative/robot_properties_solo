@@ -132,11 +132,10 @@ class Solo12Robot(PinBulletWrapper):
         q0 = np.matrix(Solo12Config.initial_configuration).T
         dq0 = np.matrix(Solo12Config.initial_velocity).T
         self.reset_state(q0, dq0)
-
-"""
-Similar to the class above, but without PyBullet. Used for ROS + Gazebo projects
-"""
 class Solo12RobotWithoutPybullet():
+    """
+    Similar to the class above, but without PyBullet. Used for ROS + Gazebo projects
+    """
     def __init__(self):
 
         self.urdf_path = Solo12Config.urdf_path
@@ -165,9 +164,9 @@ class Solo12RobotWithoutPybullet():
         self.fr_index = self.pin_robot.model.getFrameId("FR_ANKLE")
 
     def forward_robot(self, q=None, dq=None):
-        if not q:
+        if q is None:
             q, dq = self.get_state()
-        elif not dq:
+        elif dq is None:
             raise ValueError("Need to provide q and dq or non of them.")
 
         self.pin_robot.forwardKinematics(q, dq)
@@ -177,8 +176,8 @@ class Solo12RobotWithoutPybullet():
 
     def reset_to_initial_state(self) -> None:
         """Reset robot state to the initial configuration (based on Solo12Config)."""
-        q0 = np.matrix(Solo12Config.initial_configuration).T
-        dq0 = np.matrix(Solo12Config.initial_velocity).T
+        q0 = np.array(Solo12Config.initial_configuration)
+        dq0 = np.array(Solo12Config.initial_velocity)
         self.reset_state(q0, dq0)
     
     def update_pinocchio(self, q, dq):
@@ -191,6 +190,7 @@ class Solo12RobotWithoutPybullet():
           q: Pinocchio generalized position vector.
           dq: Pinocchio generalize velocity vector.
         """
+        self.pin_robot.forwardKinematics(q, dq)
         self.pin_robot.computeJointJacobians(q)
         self.pin_robot.framesForwardKinematics(q)
         self.pin_robot.centroidalMomentum(q, dq)
