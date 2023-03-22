@@ -110,3 +110,9 @@ class Solo8Robot(PinBulletWrapper):
             return pybullet.readUserDebugParameter(self.slider_c)
         if letter == "d":
             return pybullet.readUserDebugParameter(self.slider_d)
+
+    def reset_to_initial_state(self) -> None:
+        """Reset robot state to the initial configuration (based on Solo8Config)."""
+        q0 = np.matrix(Solo8Config.initial_configuration).T
+        dq0 = np.matrix(Solo8Config.initial_velocity).T
+        self.reset_state(q0, dq0)
