@@ -14,7 +14,6 @@ import os
 import pybullet
 from bullet_utils.wrapper import PinBulletWrapper
 from robot_properties_solo.config import Solo8Config
-from robot_properties_solo.utils import find_paths
 
 dt = 1e-3
 
