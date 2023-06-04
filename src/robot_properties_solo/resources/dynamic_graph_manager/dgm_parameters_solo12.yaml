@@ -36,6 +36,12 @@ device:
       size: 3
     imu_attitude:
       size: 4
+    powerboard_current:
+      size: 1
+    powerboard_voltage:
+      size: 1
+    powerboard_energy:
+      size: 1
     # robot status
     motor_enabled:
       size: 12
